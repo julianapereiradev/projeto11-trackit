@@ -4,8 +4,16 @@ import Menu from "../components/Menu";
 import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import ItemHoje from "../components/ItemHoje";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
-export default function Hoje() {
+export default function Hoje(props) {
+
+  const {token} = props;
+  console.log('props de token:', props)
+
+  const [buscarHabitos, setBuscarHabitos] = useState([]);
+
   const diaDaSemanaCompleto = dayjs().locale("pt-br").format("dddd");
   const diaMes = dayjs().locale("pt-br").format("DD/MM");
 
@@ -14,6 +22,27 @@ export default function Hoje() {
   const stringSemanaMinuscula = arraySemana.join("");
   const diaDaSemana =
     stringSemanaMinuscula[0].toUpperCase() + stringSemanaMinuscula.substring(1);
+
+
+    useEffect( () => {
+
+      const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
+  
+      const config = {
+        headers:{
+          Authorization: `Bearer ${token}`
+        }
+      };
+  
+      const promise = axios.get(URL, config);
+  
+      promise.then( resposta => setBuscarHabitos(resposta.data));
+  
+      promise.catch( erro => console.log('ERRO NO GET DE BUSCAR HÁBITO:',erro.response));
+  
+    }, []);
+
+    console.log('buscarHabitos::', buscarHabitos)
 
   return (
     <>
