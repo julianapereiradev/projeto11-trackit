@@ -6,6 +6,8 @@ import Hoje from "./pages/Hoje";
 import Historico from "./pages/Historico";
 
 export default function App() {
+
+  
   return (
     <BrowserRouter>
       <Routes>

@@ -10,7 +10,6 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	input {
-		background: #FFFFFF;
 		border: 1px solid #D4D4D4;
 		border-radius: 5px;
 		height: 45px;
@@ -34,7 +33,6 @@ const GlobalStyle = createGlobalStyle`
 		font-family: 'Lexend Deca', sans-serif;
 		border-radius: 5px;
 		border: none;
-		cursor: pointer;
 	}
 `
 
