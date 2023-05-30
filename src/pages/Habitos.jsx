@@ -33,4 +33,6 @@ export default function Habitos() {
     
     const DivContainer = styled.div`
       margin-top: 80px; /* Altura da navbar + espaço de margem */
-    `;
+      margin-left: 10px;
+      margin-right: 10px;
+   `;
