@@ -7,10 +7,8 @@ import ItemHoje from "../components/ItemHoje";
 import axios from "axios";
 import { useEffect, useState } from "react";
 
-export default function Hoje(props) {
+export default function Hoje() {
 
-  const {token} = props;
-  console.log('props de token:', props)
 
   const [buscarHabitos, setBuscarHabitos] = useState([]);
 
@@ -26,19 +24,19 @@ export default function Hoje(props) {
 
     useEffect( () => {
 
-      const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
+      // const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
   
-      const config = {
-        headers:{
-          Authorization: `Bearer ${token}`
-        }
-      };
+      // const config = {
+      //   headers:{
+      //     Authorization: `Bearer ${token}`
+      //   }
+      // };
   
-      const promise = axios.get(URL, config);
+      // const promise = axios.get(URL, config);
   
-      promise.then( resposta => setBuscarHabitos(resposta.data));
+      // promise.then( resposta => setBuscarHabitos(resposta.data));
   
-      promise.catch( erro => console.log('ERRO NO GET DE BUSCAR HÁBITO:',erro.response));
+      // promise.catch( erro => console.log('ERRO NO GET DE BUSCAR HÁBITO:',erro.response));
   
     }, []);
 

@@ -13,45 +13,43 @@ export default function CriarHabito(props) {
     setNameHabit,
     escolhiDia,
     setEscolhiDia,
-    token,
     itensHabitos,
     setItensHabitos,
     isDisabled,
     setIsDisabled,
   } = props;
 
-  console.log('token aqui:', token)
 
   function SaveHabit(e) {
-    e.preventDefault();
+    // e.preventDefault();
 
-      const URL =
-        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+    //   const URL =
+    //     "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
-      const config = {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      };
+    //   const config = {
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //   };
 
-      const novo = { name: nameHabit, days: escolhiDia };
+    //   const novo = { name: nameHabit, days: escolhiDia };
 
-      const promise = axios.post(URL, config, novo);
+    //   const promise = axios.post(URL, config, novo);
 
-      setIsDisabled(true);
+    //   setIsDisabled(true);
 
-        promise.then((resposta) => {
-        console.log("resposta.data", resposta.data);
-        setItensHabitos(resposta.data)
-        setMostrando("displayTela3")
-      });
+    //     promise.then((resposta) => {
+    //     console.log("resposta.data", resposta.data);
+    //     setItensHabitos(resposta.data)
+    //     setMostrando("displayTela3")
+    //   });
 
-        promise.catch((erro) => {
-        alert(erro.response.data.message)
-        // alert(erro.response.data.message);
-        setIsDisabled(false)
-        console.log('ERRO DE POST EM CRIAR HABITO AQUI:', erro)
-      });
+    //     promise.catch((erro) => {
+    //     alert(erro.response.data.message)
+    //     // alert(erro.response.data.message);
+    //     setIsDisabled(false)
+    //     console.log('ERRO DE POST EM CRIAR HABITO AQUI:', erro)
+    //   });
   }
 
   function CancelAdc() {

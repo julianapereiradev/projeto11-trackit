@@ -5,9 +5,8 @@ import ItemHabitos from "../components/ItemHabitos";
 import CriarHabito from "../components/CriarHabito";
 import { useState } from "react";
 
-export default function Habitos(props) {
+export default function Habitos() {
 
-  const {token} = props;
   
   const [mostrando, setMostrando] = useState("displayTela1");
 
@@ -51,7 +50,6 @@ export default function Habitos(props) {
           setNameHabit={setNameHabit}
           escolhiDia={escolhiDia}
           setEscolhiDia={setEscolhiDia}
-          token={token}
           itensHabitos={itensHabitos}
           setItensHabitos={setItensHabitos}
           isDisabled={isDisabled}

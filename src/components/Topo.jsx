@@ -1,10 +1,15 @@
 import styled from "styled-components";
+import { useContext } from "react";
+import { Context } from "../context/Context";
 
 export default function Topo() {
+
+const {userInfo, setUserInfo} = useContext(Context)
+
     return (
         <DivTopo>
         <p>TrackIt</p>
-        <img src="https://i.pinimg.com/736x/29/93/de/2993de8da16f1ab3acb3f402ed6be2a8--school-counselor-school-teacher.jpg" />
+        <img src={userInfo.image} />
       </DivTopo>
     )
 }
