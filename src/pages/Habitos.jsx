@@ -2,30 +2,44 @@ import styled from "styled-components";
 import Topo from "../components/Topo";
 import Menu from "../components/Menu";
 import ItemHabitos from "../components/ItemHabitos";
+import CriarHabito from "../components/CriarHabito";
+import { useState } from "react";
 
 export default function Habitos() {
+  const [mostrando, setMostrando] = useState("displayTela1");
+
+  function TheAdd() {
+    alert("Clicou no + ");
+    setMostrando("displayTela2");
+  }
+
   return (
     <>
       <Topo />
 
       <DivContainer>
-
         <DivAdcHabito>
           <h2>Meus Hábitos</h2>
-          <button>+</button>
+          <button onClick={TheAdd}>+</button>
         </DivAdcHabito>
 
-        <div>
+        {/* <div>
+          <CriarHabito />
           <ItemHabitos />
           <ItemHabitos />
           <ItemHabitos /> 
-        </div>
+        </div> */}
 
-        <p>
-          Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-          começar a trackear!
-        </p>
-        
+        {mostrando === "displayTela1" && (
+          <p>
+            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
+            começar a trackear!
+          </p>
+        )}
+
+        {mostrando === "displayTela2" && (
+          <CriarHabito />
+        )}
       </DivContainer>
 
       <Menu />

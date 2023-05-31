@@ -5,6 +5,7 @@ import Habitos from "./pages/Habitos";
 import Hoje from "./pages/Hoje";
 import Historico from "./pages/Historico";
 import { useState } from "react";
+import dias from './diasdasemana'
 
 export default function App() {
 
