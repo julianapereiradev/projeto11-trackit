@@ -6,12 +6,14 @@ import Hoje from "./pages/Hoje";
 import Historico from "./pages/Historico";
 import { useState } from "react";
 import dias from './diasdasemana'
+import { Provider } from "./context/Context";
 
 export default function App() {
 
   const [token, setToken] = useState('');
   
   return (
+    <Provider>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login setToken={setToken} />} />
@@ -21,5 +23,6 @@ export default function App() {
         <Route path="/historico" element={<Historico token={token} />} />
       </Routes>
     </BrowserRouter>
+    </Provider>
   );
 }

@@ -3,6 +3,7 @@ import styled from "styled-components";
 import logo from "../images/logo-trackit.png";
 import { useState } from "react";
 import axios from "axios";
+import { ThreeDots } from "react-loader-spinner";
 
 export default function Cadastro() {
   const navigate = useNavigate();
@@ -15,12 +16,12 @@ export default function Cadastro() {
 
   function RegisterUser(e) {
     e.preventDefault();
-    
-    
-    const URL = "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
-    
+
+    const URL =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
+
     const novo = { email, name, image, password };
-    
+
     const promise = axios.post(URL, novo);
 
     setIsDisabled(true);
@@ -31,10 +32,10 @@ export default function Cadastro() {
     });
 
     promise.catch((erro) => {
-      alert(erro.response.data.message)
+      alert(erro.response.data.message);
       // alert(erro.response.data.message);
-      setIsDisabled(false)
-      console.log('ERRO DE CADASTRO AQUI:', erro)
+      setIsDisabled(false);
+      console.log("ERRO DE CADASTRO AQUI:", erro);
     });
   }
 
@@ -74,9 +75,15 @@ export default function Cadastro() {
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
+
       <button type="submit" disabled={isDisabled}>
-        Cadastrar
+        {isDisabled ? (
+          <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
+        ) : (
+          "Cadastrar"
+        )}
       </button>
+
       <Link to={`/`} style={{ color: "#52b6ff", fontSize: "14px" }}>
         Já tem uma conta? Faça login!
       </Link>
