@@ -7,10 +7,13 @@ export default function ItemHabitos(props) {
   const {
     nameHabit,
     escolhiDia,
+    itensHabitos,
+    setItensHabitos,
   } = props;
 
   console.log("escolhi dia em ITEMMMM", escolhiDia);
 
+  console.log('itensHabitos em ITENSHABITOS', itensHabitos)
   return (
     <DivItemHabito>
       <DivItemUp>

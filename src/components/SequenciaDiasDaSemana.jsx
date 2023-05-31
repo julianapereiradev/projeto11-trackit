@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 export default function SequenciaDiasDaSemana(props) {
 
-const {id, diaSemana, sigla, escolhiDia, setEscolhiDia } = props
+const {id, sigla, escolhiDia, setEscolhiDia } = props
 
 const [isSelected, setIsSelected] = useState(false);
 

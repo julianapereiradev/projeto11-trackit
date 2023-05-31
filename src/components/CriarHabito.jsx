@@ -1,68 +1,100 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
-import dias from '../diasdasemana'
+import dias from "../diasdasemana";
 import SequenciaDiasDaSemana from "./SequenciaDiasDaSemana";
+import axios from "axios";
 
 export default function CriarHabito(props) {
+  // console.log('propsss', props)
 
-  const {setMostrando, nameHabit, setNameHabit, escolhiDia, setEscolhiDia } = props
+  const {
+    setMostrando,
+    nameHabit,
+    setNameHabit,
+    escolhiDia,
+    setEscolhiDia,
+    token,
+    itensHabitos,
+    setItensHabitos,
+    isDisabled,
+    setIsDisabled,
+  } = props;
 
-  // const [nameHabit, setNameHabit] = useState("");
-  // const [escolhiDia, setEscolhiDia] = useState([]);
+  console.log('token aqui:', token)
 
-function SaveHabit(e) {
-  e.preventDefault();
-//aqui você fará o post no formato:
-// {
-// 	name: "Nome do hábito",
-// 	days: [1, 3, 5] // segunda, quarta e sexta
-// }
-setMostrando("displayTela3")
-}
+  function SaveHabit(e) {
+    e.preventDefault();
 
-function CancelAdc() {
-  setMostrando("displayTela1")
-  //falta fazer a lógica de pegar o que foi 
-  //escrito para quando clicar no + de novo, 
-  //ele voltar com os dados
-}
+      const URL =
+        "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
-// console.log('pegando array dias da semana em escolhiDia', escolhiDia)
-// console.log('pegando string nome do habito em nameHabit', nameHabit)
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+
+      const novo = { name: nameHabit, days: escolhiDia };
+
+      const promise = axios.post(URL, config, novo);
+
+      setIsDisabled(true);
+
+        promise.then((resposta) => {
+        console.log("resposta.data", resposta.data);
+        setItensHabitos(resposta.data)
+        setMostrando("displayTela3")
+      });
+
+        promise.catch((erro) => {
+        alert(erro.response.data.message)
+        // alert(erro.response.data.message);
+        setIsDisabled(false)
+        console.log('ERRO DE POST EM CRIAR HABITO AQUI:', erro)
+      });
+  }
+
+  function CancelAdc() {
+    setMostrando("displayTela1");
+    //falta fazer a lógica de pegar o que foi
+    //escrito para quando clicar no + de novo,
+    //ele voltar com os dados
+  }
 
   return (
     <>
       <DivItemHabito onSubmit={SaveHabit}>
         <DivItemUp>
-          <input 
-          type="text" 
-          placeholder="nome do hábito"
-          required
-          value={nameHabit}
-          onChange={ (e) => setNameHabit(e.target.value)} 
+          <input
+            type="text"
+            placeholder="nome do hábito"
+            required
+            value={nameHabit}
+            disabled={isDisabled}
+            onChange={(e) => setNameHabit(e.target.value)}
           />
         </DivItemUp>
 
         <DivItemDown>
           {dias.map((calendario) => (
-            <SequenciaDiasDaSemana 
-            key={calendario.id}
-            id={calendario.id}
-            diaSemana={calendario.diaSemana}
-            sigla={calendario.sigla}
-            escolhiDia={escolhiDia}
-            setEscolhiDia={setEscolhiDia}
+            <SequenciaDiasDaSemana
+              key={calendario.id}
+              id={calendario.id}
+              diaSemana={calendario.diaSemana}
+              sigla={calendario.sigla}
+              escolhiDia={escolhiDia}
+              setEscolhiDia={setEscolhiDia}
             />
           ))}
         </DivItemDown>
 
         <DivButtons>
           <ButtonSemCor onClick={CancelAdc}>Cancelar</ButtonSemCor>
-          <button type="submit">Salvar</button>
+          <button type="submit" disabled={isDisabled}> Salvar</button>
         </DivButtons>
       </DivItemHabito>
 
-      <p style={{marginTop: '20px'}}>
+      <p style={{ marginTop: "20px" }}>
         Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
         começar a trackear!
       </p>
@@ -131,7 +163,7 @@ const DivButtons = styled.div`
 const ButtonSemCor = styled.button`
   width: 84px;
   height: 35px;
-  background-color: #FFFFFF;
+  background-color: #ffffff;
   color: #52b6ff;
   margin-right: 10px;
   cursor: pointer;

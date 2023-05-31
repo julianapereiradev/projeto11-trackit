@@ -5,14 +5,21 @@ import ItemHabitos from "../components/ItemHabitos";
 import CriarHabito from "../components/CriarHabito";
 import { useState } from "react";
 
-export default function Habitos() {
+export default function Habitos(props) {
+
+  const {token} = props;
+  
   const [mostrando, setMostrando] = useState("displayTela1");
 
   const [nameHabit, setNameHabit] = useState("");
   const [escolhiDia, setEscolhiDia] = useState([]);
+  const [itensHabitos, setItensHabitos] = useState([])
+  const [isDisabled, setIsDisabled] = useState(false);
 
   function TheAdd() {
+    //if resposta array da lista de habitos estiver[]
     setMostrando("displayTela2");
+    //else, já estaria renderizando a tela3
   }
 
   console.log('pegando array dias da semana em escolhiDia', escolhiDia)
@@ -44,6 +51,11 @@ export default function Habitos() {
           setNameHabit={setNameHabit}
           escolhiDia={escolhiDia}
           setEscolhiDia={setEscolhiDia}
+          token={token}
+          itensHabitos={itensHabitos}
+          setItensHabitos={setItensHabitos}
+          isDisabled={isDisabled}
+          setIsDisabled={setIsDisabled}
           />
         )}
 
@@ -55,6 +67,8 @@ export default function Habitos() {
           setNameHabit={setNameHabit}
           escolhiDia={escolhiDia}
           setEscolhiDia={setEscolhiDia}
+          itensHabitos={itensHabitos}
+          setItensHabitos={setItensHabitos}
           />
         )}
 
