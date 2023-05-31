@@ -8,10 +8,15 @@ import { useState } from "react";
 export default function Habitos() {
   const [mostrando, setMostrando] = useState("displayTela1");
 
+  const [nameHabit, setNameHabit] = useState("");
+  const [escolhiDia, setEscolhiDia] = useState([]);
+
   function TheAdd() {
-    alert("Clicou no + ");
     setMostrando("displayTela2");
   }
+
+  console.log('pegando array dias da semana em escolhiDia', escolhiDia)
+  console.log('pegando string nome do habito em nameHabit', nameHabit)
 
   return (
     <>
@@ -23,12 +28,6 @@ export default function Habitos() {
           <button onClick={TheAdd}>+</button>
         </DivAdcHabito>
 
-        {/* <div>
-          <CriarHabito />
-          <ItemHabitos />
-          <ItemHabitos />
-          <ItemHabitos /> 
-        </div> */}
 
         {mostrando === "displayTela1" && (
           <p>
@@ -38,8 +37,27 @@ export default function Habitos() {
         )}
 
         {mostrando === "displayTela2" && (
-          <CriarHabito />
+          <CriarHabito 
+          mostrando={mostrando} 
+          setMostrando={setMostrando} 
+          nameHabit={nameHabit}
+          setNameHabit={setNameHabit}
+          escolhiDia={escolhiDia}
+          setEscolhiDia={setEscolhiDia}
+          />
         )}
+
+        {mostrando === "displayTela3" && (
+          <ItemHabitos 
+          mostrando={mostrando} 
+          setMostrando={setMostrando} 
+          nameHabit={nameHabit}
+          setNameHabit={setNameHabit}
+          escolhiDia={escolhiDia}
+          setEscolhiDia={setEscolhiDia}
+          />
+        )}
+
       </DivContainer>
 
       <Menu />

@@ -1,27 +1,37 @@
 import styled from "styled-components";
+import SequenciaDiasDaSemana from "./SequenciaDiasDaSemana";
+import dias from "../diasdasemana";
+import SequenciaCompleta from "./SequenciaCompleta";
 
-export default function ItemHabitos() {
-  const dias = [
-    { id: 7, diaSemana: "domingo", sigla: "D" },
-    { id: 1, diaSemana: "segunda", sigla: "S" },
-    { id: 2, diaSemana: "terça", sigla: "T" },
-    { id: 3, diaSemana: "quarta", sigla: "Q" },
-    { id: 4, diaSemana: "quinta", sigla: "Q" },
-    { id: 5, diaSemana: "sexta", sigla: "S" },
-    { id: 6, diaSemana: "sabado", sigla: "S" },
-    
-  ];
+export default function ItemHabitos(props) {
+  const {
+    nameHabit,
+    escolhiDia,
+  } = props;
+
+  console.log("escolhi dia em ITEMMMM", escolhiDia);
 
   return (
     <DivItemHabito>
       <DivItemUp>
-        <h4>Ler 1 capítulo de livro</h4>
+        <h4>{nameHabit}</h4>
         <ion-icon name="trash-outline"></ion-icon>
       </DivItemUp>
 
       <DivItemDown>
-        {dias.map((calendario) => (
-          <DivIndividualSemana>{calendario.sigla}</DivIndividualSemana>
+        {/* {dias.map((calendarioCompleto) => (
+          <div 
+          key={calendarioCompleto.id}
+          style={{ background: escolhiDia.includes(calendarioCompleto.id) ? "red" : "green" }}
+          >{calendarioCompleto.sigla}</div>
+        ))} */}
+        {dias.map((calendarioCompleto) => (
+          <SequenciaCompleta
+            key={calendarioCompleto.id}
+            id={calendarioCompleto.id}
+            escolhiDia={escolhiDia}
+            sigla={calendarioCompleto.sigla}
+          />
         ))}
       </DivItemDown>
     </DivItemHabito>
@@ -73,8 +83,7 @@ const DivIndividualSemana = styled.div`
   justify-content: center;
   align-items: center;
   border-radius: 5px;
-  border: 1px solid #CFCFCF;
-  color: #CFCFCF;
+  border: 1px solid #cfcfcf;
+  color: #cfcfcf;
   font-weight: 600;
-
 `;

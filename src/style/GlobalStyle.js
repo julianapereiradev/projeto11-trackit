@@ -19,6 +19,7 @@ const GlobalStyle = createGlobalStyle`
 		display: flex;
 		align-items: center;
 		padding-left: 10px;
+		font-family: 'Lexend Deca', sans-serif;
 		&::placeholder{
 			font-style: normal;
 			color: #DBDBDB;

@@ -3,20 +3,32 @@ import styled from "styled-components";
 import dias from '../diasdasemana'
 import SequenciaDiasDaSemana from "./SequenciaDiasDaSemana";
 
-export default function CriarHabito() {
+export default function CriarHabito(props) {
 
-  const [nameHabit, setNameHabit] = useState("");
-  const [escolhiDia, setEscolhiDia] = useState([]);
+  const {setMostrando, nameHabit, setNameHabit, escolhiDia, setEscolhiDia } = props
+
+  // const [nameHabit, setNameHabit] = useState("");
+  // const [escolhiDia, setEscolhiDia] = useState([]);
 
 function SaveHabit(e) {
+  e.preventDefault();
 //aqui você fará o post no formato:
 // {
 // 	name: "Nome do hábito",
 // 	days: [1, 3, 5] // segunda, quarta e sexta
 // }
+setMostrando("displayTela3")
 }
 
-console.log('pegando escolhi dia em array:',escolhiDia)
+function CancelAdc() {
+  setMostrando("displayTela1")
+  //falta fazer a lógica de pegar o que foi 
+  //escrito para quando clicar no + de novo, 
+  //ele voltar com os dados
+}
+
+// console.log('pegando array dias da semana em escolhiDia', escolhiDia)
+// console.log('pegando string nome do habito em nameHabit', nameHabit)
 
   return (
     <>
@@ -45,7 +57,7 @@ console.log('pegando escolhi dia em array:',escolhiDia)
         </DivItemDown>
 
         <DivButtons>
-          <ButtonSemCor>Cancelar</ButtonSemCor>
+          <ButtonSemCor onClick={CancelAdc}>Cancelar</ButtonSemCor>
           <button type="submit">Salvar</button>
         </DivButtons>
       </DivItemHabito>

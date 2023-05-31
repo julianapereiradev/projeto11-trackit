@@ -9,8 +9,7 @@ const [isSelected, setIsSelected] = useState(false);
 
 
 function CliqueiDiadaSemana() {
-  alert(`Cliquei no id ${id}`)
-  
+ 
   setIsSelected(!isSelected);
 
   if (!isSelected === true && !escolhiDia.includes(id)) {
