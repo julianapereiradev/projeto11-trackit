@@ -5,16 +5,16 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import ItemHoje from "../components/ItemHoje";
 import axios from "axios";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { Context } from "../context/Context";
 
 export default function Hoje() {
-  const { 
-    token, 
-    todaysHabitsList, 
-    setTodaysHabitsList, 
-    totalVerdadeiros, 
-    setTotalVerdadeiros
+  const {
+    token,
+    todaysHabitsList,
+    setTodaysHabitsList,
+    totalVerdadeiros,
+    setTotalVerdadeiros,
   } = useContext(Context);
 
   const diaDaSemanaCompleto = dayjs().locale("pt-br").format("dddd");
@@ -40,19 +40,15 @@ export default function Hoje() {
 
     promise.then((resposta) => {
       setTodaysHabitsList(resposta.data);
-      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true))
-      console.log("resposta get em HOJE pelo useEffect:", resposta.data);
+      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true));
+      console.log("resposta.data em: GET no Hoje via useEffect:", resposta.data);
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
-      console.log("ERRO get em HOJE pelo useEffect:", erro);
+      console.log("erro em: GET no Hoje via useEffect", erro);
     });
   }, []);
-
-
-console.log('todaysHabitsList em hoje:', todaysHabitsList)
-console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
 
   return (
     <>
@@ -63,8 +59,15 @@ console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
           {diaDaSemana}, {diaMes}
         </h2>
 
-
-        <h3>{totalVerdadeiros.length === 0 ? ('Nenhum hábito concluído ainda'):(Math.floor(((Number(totalVerdadeiros.length))/(Number(todaysHabitsList.length)))*100)) + "% dos hábitos concluídos"}</h3>
+        <h3>
+          {totalVerdadeiros.length === 0
+            ? "Nenhum hábito concluído ainda"
+            : Math.floor(
+                (Number(totalVerdadeiros.length) /
+                  Number(todaysHabitsList.length)) *
+                  100
+              ) + "% dos hábitos concluídos"}
+        </h3>
 
         {todaysHabitsList.map((today) => (
           <ItemHoje
@@ -85,15 +88,13 @@ console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
 }
 
 const DivContainer = styled.div`
-  margin-top: 80px;
-  margin-left: 10px;
-  margin-right: 10px;
+  padding: 10px;
 
   h2 {
     color: #126ba5;
     font-weight: 400;
     font-size: 23px;
-    margin-top: 100px;
+    margin-top: 90px;
     margin-bottom: 5px;
   }
 

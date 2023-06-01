@@ -4,9 +4,20 @@ import { Context } from "../context/Context";
 import axios from "axios";
 
 export default function ItemHoje(props) {
-  const { currentSequence, done, highestSequence, id, name } = props;
-  const { token, setTodaysHabitsList, setTotalVerdadeiros } =
-    useContext(Context);
+
+  const { 
+    currentSequence, 
+    done, 
+    highestSequence, 
+    id, 
+    name
+  } = props;
+  
+  const { 
+    token, 
+    setTodaysHabitsList, 
+    setTotalVerdadeiros 
+  } = useContext(Context);
 
   const [isChecked, setIsChecked] = useState(done);
 
@@ -26,14 +37,14 @@ export default function ItemHoje(props) {
       setTodaysHabitsList(resposta.data);
       setTotalVerdadeiros(resposta.data.filter((i) => i.done == true));
       console.log(
-        "resposta.data do get RELOAD DPS DE Marcar/Desmarcar",
+        "resposta.data em: GET no ItemHoje para recarregar lista Hoje:",
         resposta.data
       );
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
-      console.log("ERRO DE RELOAD DPS DE Marcar/Desmarcar:", erro);
+      console.log("erro em: GET no ItemHoje para recarregar lista Hoje:", erro);
     });
   }
 
@@ -54,12 +65,14 @@ export default function ItemHoje(props) {
       promise.then((r) => {
         setIsChecked(!isChecked);
         reloadAfterCheckUncheck();
+        console.log("r em: POST no ItemHoje para desmarcar ItemHoje:", r);
       });
 
       promise.catch((erro) => {
         alert(erro.response.data.message);
-        console.log("ERRO post em HOJE pelo desmarcar:", erro);
+        console.log("erro em: POST no ItemHoje para desmarcar ItemHoje:", erro);
       });
+
     } else {
       const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/check`;
 
@@ -76,17 +89,19 @@ export default function ItemHoje(props) {
       promise.then((r) => {
         setIsChecked(!isChecked);
         reloadAfterCheckUncheck();
+        console.log("r em: POST no ItemHoje para marcar ItemHoje:", r);
       });
 
       promise.catch((erro) => {
         alert(erro.response.data.message);
-        console.log("ERRO post em HOJE pelo marcar:", erro);
+        console.log("erro em: POST no ItemHoje para desmarcar ItemHoje:", erro);
       });
     }
   };
 
   return (
     <DivItemHoje>
+      
       <DivItemLeft>
         <h4>{name}</h4>
         <p>
@@ -107,7 +122,10 @@ export default function ItemHoje(props) {
         </p>
       </DivItemLeft>
 
-      <CheckboxButton onClick={handleChange} checked={isChecked}>
+      <CheckboxButton 
+        onClick={handleChange} 
+        checked={isChecked}
+      >
         <Checkmark checked={isChecked}>
           <ion-icon name="checkmark-sharp"></ion-icon>
         </Checkmark>
@@ -118,13 +136,13 @@ export default function ItemHoje(props) {
 
 const DivItemHoje = styled.div`
   background-color: #ffffff;
-
   height: 94px;
-  margin-bottom: 7px;
+  border-radius: 5px;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  margin-bottom: 7px;
 `;
 
 const DivItemLeft = styled.div`
@@ -143,24 +161,32 @@ const DivItemLeft = styled.div`
   }
 `;
 
-const SpanSequency = styled.span`
-  color: ${(props) => (props.colorsequency ? "green" : "grey")};
-`;
-
-const RecordSequency = styled.span`
-  color: ${(props) => (props.colorrecord ? "green" : "grey")};
-`;
-
 const CheckboxButton = styled.button`
-  background-color: ${(props) => (props.checked ? "green" : "grey")};
+  background-color: ${(props) => (props.checked ? "#8FC549" : "#EBEBEB")};
   margin-right: 10px;
+  width: 70px;
+  height: 70px;
+  border-radius: 5px;
+  border: none;
+  cursor: pointer;
 `;
 
 const Checkmark = styled.span`
-  background-color: ${(props) => (props.checked ? "green" : "grey")};
+  background-color: ${(props) => (props.checked ? "#8FC549" : "#EBEBEB")};
+  width: 70px;
+  height: 70px;
 
   ion-icon {
     color: #ffffff;
-    font-size: 40px;
+    font-size: 50px;
   }
 `;
+
+const SpanSequency = styled.span`
+  color: ${(props) => (props.colorsequency ? "#8FC549" : "#666666")};
+`;
+
+const RecordSequency = styled.span`
+  color: ${(props) => (props.colorrecord ? "#8FC549" : "#666666")};
+`;
+
