@@ -13,6 +13,10 @@ export default function App() {
   const [image, setImage] = useState('')
   const [enabled, setEnabled] = useState(false)
   const [name, setName] = useState('')
+  const [add, setAdd] = useState(false)
+  const [habitsList, setHabitsList] = useState([])
+  const [days, setDays] = useState([])
+
 
   
   return (
@@ -24,7 +28,13 @@ export default function App() {
       enabled,
       setEnabled,
       name,
-      setName
+      setName,
+      add,
+      setAdd,
+      habitsList,
+      setHabitsList,
+      days,
+      setDays,
     }}>
     <BrowserRouter>
       <Routes>

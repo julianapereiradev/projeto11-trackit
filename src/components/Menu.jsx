@@ -4,7 +4,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
 
 export default function Menu() {
-  const percentage = 66;
+  // const percentage = 66;
 
   return (
     <>
@@ -19,7 +19,8 @@ export default function Menu() {
           <div style={{ width: "17%" }}>
             <Link to={`/hoje`}>
             <CircularProgressbar
-              value={percentage}
+              // value={percentage}
+              value={20}
               text={`Hoje`}
               background
               backgroundPadding={6}

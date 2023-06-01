@@ -1,74 +1,38 @@
 import styled from "styled-components";
 import Topo from "../components/Topo";
 import Menu from "../components/Menu";
-import ItemHabitos from "../components/ItemHabitos";
-import CriarHabito from "../components/CriarHabito";
-import { useState } from "react";
+// import ItemHabitos from "../components/ItemHabitos";
+// import CriarHabito from "../components/CriarHabito";
+import { useContext, useState } from "react";
+import { Context } from "../context/Context";
+import ListaHabitos from "./ListaHabitos";
 
 export default function Habitos() {
 
+  const { 
+    add, 
+    setAdd, 
+    token, 
+    setToken, 
+    habitsList, 
+    setHabitsList,
+    enabled,
+    setEnabled,
+  } = useContext(Context)
+
   
-  const [mostrando, setMostrando] = useState("displayTela1");
-
-  const [nameHabit, setNameHabit] = useState("");
-  const [escolhiDia, setEscolhiDia] = useState([]);
-  const [itensHabitos, setItensHabitos] = useState([])
-  const [isDisabled, setIsDisabled] = useState(false);
-
-  function TheAdd() {
-    //if resposta array da lista de habitos estiver[]
-    setMostrando("displayTela2");
-    //else, já estaria renderizando a tela3
-  }
-
-  console.log('pegando array dias da semana em escolhiDia', escolhiDia)
-  console.log('pegando string nome do habito em nameHabit', nameHabit)
-
   return (
     <>
       <Topo />
 
       <DivContainer>
+
         <DivAdcHabito>
           <h2>Meus Hábitos</h2>
-          <button onClick={TheAdd}>+</button>
+          <button onClick={() => setAdd(true)}>+</button>
         </DivAdcHabito>
 
-
-        {mostrando === "displayTela1" && (
-          <p>
-            Você não tem nenhum hábito cadastrado ainda. Adicione um hábito para
-            começar a trackear!
-          </p>
-        )}
-
-        {mostrando === "displayTela2" && (
-          <CriarHabito 
-          mostrando={mostrando} 
-          setMostrando={setMostrando} 
-          nameHabit={nameHabit}
-          setNameHabit={setNameHabit}
-          escolhiDia={escolhiDia}
-          setEscolhiDia={setEscolhiDia}
-          itensHabitos={itensHabitos}
-          setItensHabitos={setItensHabitos}
-          isDisabled={isDisabled}
-          setIsDisabled={setIsDisabled}
-          />
-        )}
-
-        {mostrando === "displayTela3" && (
-          <ItemHabitos 
-          mostrando={mostrando} 
-          setMostrando={setMostrando} 
-          nameHabit={nameHabit}
-          setNameHabit={setNameHabit}
-          escolhiDia={escolhiDia}
-          setEscolhiDia={setEscolhiDia}
-          itensHabitos={itensHabitos}
-          setItensHabitos={setItensHabitos}
-          />
-        )}
+        <ListaHabitos />
 
       </DivContainer>
 

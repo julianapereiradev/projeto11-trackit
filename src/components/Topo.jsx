@@ -4,12 +4,12 @@ import { Context } from "../context/Context";
 
 export default function Topo() {
 
-// const {userInfo, setUserInfo} = useContext(Context)
+const {image} = useContext(Context)
 
     return (
         <DivTopo>
         <p>TrackIt</p>
-        <img src={'userInfo.imag'} />
+        <img src={image} />
       </DivTopo>
     )
 }
