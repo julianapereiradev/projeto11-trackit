@@ -5,7 +5,10 @@ import { ThreeDots } from "react-loader-spinner";
 import diasDaSemana from "../constants/diasdasemana";
 import axios from "axios";
 
-export default function RegistrarHabito() {
+export default function RegistrarHabito(props) {
+
+const {reloadAfterAdd} = props
+
   const {
     add,
     setAdd,
@@ -63,6 +66,7 @@ export default function RegistrarHabito() {
         setDays([]);
         setName("");
         setAdd(false);
+        reloadAfterAdd()
         setEnabled(false);
         //function recarregar pag toda vez q um novo dia é adc
       });
