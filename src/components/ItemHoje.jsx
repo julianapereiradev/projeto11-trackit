@@ -4,8 +4,9 @@ import { Context } from "../context/Context";
 import axios from "axios";
 
 export default function ItemHoje(props) {
-  const { currentSequence, done, highestSequence, id, name, today } = props;
-  const { token, setTodaysHabitsList, setTotalVerdadeiros } = useContext(Context);
+  const { currentSequence, done, highestSequence, id, name } = props;
+  const { token, setTodaysHabitsList, setTotalVerdadeiros } =
+    useContext(Context);
 
   const [isChecked, setIsChecked] = useState(done);
 
@@ -23,7 +24,7 @@ export default function ItemHoje(props) {
 
     promise.then((resposta) => {
       setTodaysHabitsList(resposta.data);
-      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true))
+      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true));
       console.log(
         "resposta.data do get RELOAD DPS DE Marcar/Desmarcar",
         resposta.data
@@ -89,10 +90,20 @@ export default function ItemHoje(props) {
       <DivItemLeft>
         <h4>{name}</h4>
         <p>
-          Sequência atual: <span style={{ color: "#8FC549" }}>{currentSequence}</span>
+          Sequência atual:{" "}
+          <SpanSequency colorsequency={isChecked}>
+            {currentSequence} {currentSequence === 1 ? ('dia'):('dias')}
+          </SpanSequency>
         </p>
         <p>
-          Seu recorde: <span>{highestSequence}</span>
+          Seu recorde:{" "}
+          <RecordSequency
+            colorrecord={
+              highestSequence > 0 && highestSequence === currentSequence
+            }
+          >
+            {highestSequence} {highestSequence === 1 ? ('dia'):('dias')}
+          </RecordSequency>
         </p>
       </DivItemLeft>
 
@@ -132,13 +143,21 @@ const DivItemLeft = styled.div`
   }
 `;
 
+const SpanSequency = styled.span`
+  color: ${(props) => (props.colorsequency ? "green" : "grey")};
+`;
+
+const RecordSequency = styled.span`
+  color: ${(props) => (props.colorrecord ? "green" : "grey")};
+`;
+
 const CheckboxButton = styled.button`
-  background-color: ${(props) => (props.checked ? "green" : "red")};
+  background-color: ${(props) => (props.checked ? "green" : "grey")};
   margin-right: 10px;
 `;
 
 const Checkmark = styled.span`
-  background-color: ${(props) => (props.checked ? "green" : "red")};
+  background-color: ${(props) => (props.checked ? "green" : "grey")};
 
   ion-icon {
     color: #ffffff;

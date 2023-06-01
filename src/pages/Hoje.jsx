@@ -64,7 +64,7 @@ console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
         </h2>
 
 
-        <h3>{((Number(totalVerdadeiros.length))/(Number(todaysHabitsList.length)))*100}% dos hábitos concluídos</h3>
+        <h3>{totalVerdadeiros.length === 0 ? ('Nenhum hábito concluído ainda'):(Math.floor(((Number(totalVerdadeiros.length))/(Number(todaysHabitsList.length)))*100)) + "% dos hábitos concluídos"}</h3>
 
         {todaysHabitsList.map((today) => (
           <ItemHoje
