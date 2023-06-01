@@ -1,21 +1,29 @@
 import { Link, useNavigate } from "react-router-dom";
 import styled from "styled-components";
 import logo from "../images/logo-trackit.png";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
+import { Context } from "../context/Context";
 
 export default function Cadastro() {
+
+  const {
+    image,
+    setImage,
+    enabled,
+    setEnabled
+  } = useContext(Context)
+
   const navigate = useNavigate();
 
-  const [isDisabled, setIsDisabled] = useState(false);
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [image, setImage] = useState("");
   const [password, setPassword] = useState("");
 
   function RegisterUser(e) {
     e.preventDefault();
+    setEnabled(true)
 
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
@@ -24,30 +32,31 @@ export default function Cadastro() {
 
     const promise = axios.post(URL, novo);
 
-    setIsDisabled(true);
-
     promise.then((resposta) => {
       console.log("resposta.data", resposta.data);
       navigate("/");
+      setEnabled(false)
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
       // alert(erro.response.data.message);
-      setIsDisabled(false);
+      setEnabled(false)
       console.log("ERRO DE CADASTRO AQUI:", erro);
     });
   }
 
   return (
     <DivLoginContainer onSubmit={RegisterUser}>
+
       <img src={logo} />
       <p>TrackIt</p>
+
       <input
         type="email"
         placeholder="email"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -55,7 +64,7 @@ export default function Cadastro() {
         type="password"
         placeholder="senha"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
@@ -63,7 +72,7 @@ export default function Cadastro() {
         type="text"
         placeholder="nome"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
@@ -71,14 +80,19 @@ export default function Cadastro() {
         type="url"
         placeholder="foto"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
 
-      <button type="submit" disabled={isDisabled}>
-        {isDisabled ? (
-          <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
+      <button type="submit" disabled={enabled}>
+        {enabled ? (
+          <ThreeDots 
+          type="ThreeDots" 
+          color="#fff" 
+          height={20} 
+          width={50} 
+          />
         ) : (
           "Cadastrar"
         )}
@@ -114,5 +128,13 @@ const DivLoginContainer = styled.form`
     width: 303px;
     font-size: 21px;
     margin-bottom: 30px;
+    background-color: #52B6FF ;
+		color: #FFFFFF;
+		font-family: 'Lexend Deca', sans-serif;
+		border-radius: 5px;
+		border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

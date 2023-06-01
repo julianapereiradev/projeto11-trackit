@@ -7,51 +7,60 @@ import axios from "axios";
 import { ThreeDots } from "react-loader-spinner";
 
 export default function Login() {
-  const { userInfo, setUserInfo } = useContext(Context);
+
+  const {
+    setImage,
+    enabled,
+    setEnabled,
+    setToken,
+  } = useContext(Context)
 
   const navigate = useNavigate();
 
-  const [isDisabled, setIsDisabled] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+
   function LoginUser(e) {
     e.preventDefault();
+    setEnabled(true)
 
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
 
-    const novoLogin = { email, password };
+    const novo = { email, password };
 
-    const promise = axios.post(URL, novoLogin);
+    const promise = axios.post(URL, novo);
 
-    setIsDisabled(true);
-
-    promise.then((resposta) => {
-      console.log(resposta.data.token);
-      console.log("resposta.data de login:", resposta.data);
-
-      setUserInfo(resposta.data);
-
+      promise.then((resposta) => {
+      console.log("resposta.data", resposta.data);
+      setImage(resposta.data.image)
+      setToken(resposta.data.token)
       navigate("/hoje");
+      setEnabled(false)
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
-      setIsDisabled(false);
-      console.log("ERRO DE LOGIN AQUI:", erro);
+      // alert(erro.response.data.message);
+      setEnabled(false)
+      console.log("ERRO DE CADASTRO AQUI:", erro);
     });
   }
 
+
+
   return (
     <DivLoginContainer onSubmit={LoginUser}>
+
       <img src={logo} />
       <p>TrackIt</p>
+
       <input
         type="email"
         placeholder="email"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
@@ -59,14 +68,19 @@ export default function Login() {
         type="password"
         placeholder="senha"
         required
-        disabled={isDisabled}
+        disabled={enabled}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="submit" disabled={isDisabled}>
-        {isDisabled ? (
-          <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
+      <button type="submit" disabled={enabled}>
+        {enabled ? (
+          <ThreeDots 
+          type="ThreeDots" 
+          color="#fff" 
+          height={20} 
+          width={50} 
+          />
         ) : (
           "Entrar"
         )}
@@ -102,5 +116,13 @@ const DivLoginContainer = styled.form`
     width: 303px;
     font-size: 21px;
     margin-bottom: 30px;
+    background-color: #52B6FF ;
+		color: #FFFFFF;
+		font-family: 'Lexend Deca', sans-serif;
+		border-radius: 5px;
+		border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 `;

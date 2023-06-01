@@ -4,13 +4,28 @@ import Cadastro from "./pages/Cadastro";
 import Habitos from "./pages/Habitos";
 import Hoje from "./pages/Hoje";
 import Historico from "./pages/Historico";
-import { Provider } from "./context/Context";
+import { Context } from "./context/Context";
+import { useState } from "react";
 
 export default function App() {
 
+  const [token, setToken] = useState('')
+  const [image, setImage] = useState('')
+  const [enabled, setEnabled] = useState(false)
+  const [name, setName] = useState('')
+
   
   return (
-    <Provider>
+    <Context.Provider value={{
+      token,
+      setToken,
+      image,
+      setImage,
+      enabled,
+      setEnabled,
+      name,
+      setName
+    }}>
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<Login />} />
@@ -20,6 +35,6 @@ export default function App() {
         <Route path="/historico" element={<Historico/>} />
       </Routes>
     </BrowserRouter>
-    </Provider>
+    </Context.Provider>
   );
 }

@@ -22,25 +22,7 @@ export default function Hoje() {
     stringSemanaMinuscula[0].toUpperCase() + stringSemanaMinuscula.substring(1);
 
 
-    useEffect( () => {
-
-      // const URL = 'https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today';
-  
-      // const config = {
-      //   headers:{
-      //     Authorization: `Bearer ${token}`
-      //   }
-      // };
-  
-      // const promise = axios.get(URL, config);
-  
-      // promise.then( resposta => setBuscarHabitos(resposta.data));
-  
-      // promise.catch( erro => console.log('ERRO NO GET DE BUSCAR HÁBITO:',erro.response));
-  
-    }, []);
-
-    console.log('buscarHabitos::', buscarHabitos)
+   console.log('buscarHabitos::', buscarHabitos)
 
   return (
     <>

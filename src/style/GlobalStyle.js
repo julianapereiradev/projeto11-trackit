@@ -28,13 +28,13 @@ const GlobalStyle = createGlobalStyle`
 		}	
 	}
 
-	button {
+	/* button {
 		background-color: #52B6FF ;
 		color: #FFFFFF;
 		font-family: 'Lexend Deca', sans-serif;
 		border-radius: 5px;
 		border: none;
-	}
+	} */
 `
 
 export default GlobalStyle
