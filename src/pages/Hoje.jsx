@@ -63,6 +63,7 @@ export default function Hoje() {
             highestSequence={today.highestSequence}
             id={today.id}
             name={today.name}
+            today={today}
           />
         ))}
       </DivContainer>
