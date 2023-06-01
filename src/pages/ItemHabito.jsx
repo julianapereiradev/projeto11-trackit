@@ -6,7 +6,7 @@ import { TrashOutline } from "react-ionicons";
 import axios from "axios";
 
 export default function ItemHabito(props) {
-  const { add, setAdd, token, setToken, habitsList, setHabitsList } =
+  const { token } =
     useContext(Context);
 
   const { id, name, days, reloadAfterAddOrDelete } = props;

@@ -8,13 +8,9 @@ import ItemHabito from "./ItemHabito";
 export default function ListaHabitos() {
   const {
     add,
-    setAdd,
     token,
-    setToken,
     habitsList,
     setHabitsList,
-    enabled,
-    setEnabled,
   } = useContext(Context);
 
   function reloadAfterAddOrDelete() {

@@ -10,12 +10,8 @@ export default function RegistrarHabito(props) {
 const {reloadAfterAddOrDelete} = props
 
   const {
-    add,
     setAdd,
     token,
-    setToken,
-    habitsList,
-    setHabitsList,
     name,
     setName,
     enabled,

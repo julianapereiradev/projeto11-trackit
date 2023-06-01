@@ -11,14 +11,9 @@ import axios from "axios";
 export default function Habitos() {
 
   const { 
-    add, 
     setAdd, 
     token, 
-    setToken, 
-    habitsList, 
     setHabitsList,
-    enabled,
-    setEnabled,
   } = useContext(Context)
 
   useEffect(() => {
