@@ -51,18 +51,6 @@ export default function Hoje() {
   }, []);
 
 
-//aqui funciona
-// const apenasVerdadeiross = todaysHabitsList.filter((i) => i.done)
-// console.log('apenas verdadeiros', apenasVerdadeiross.length)
-
-// console.log("todaysHabitsList mostra lista de today atualizada:", todaysHabitsList);
-//  console.log("qtd de itens:", todaysHabitsList.length);
-
-// const totaal = (Number(apenasVerdadeiross.length)/Number(todaysHabitsList.length))*100
-// console.log('TOTAAAAAL:', totaal)
-
-// console.log('total aqui:', total)
-
 console.log('todaysHabitsList em hoje:', todaysHabitsList)
 console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
 
