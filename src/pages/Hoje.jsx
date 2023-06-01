@@ -5,12 +5,11 @@ import dayjs from "dayjs";
 import "dayjs/locale/pt-br";
 import ItemHoje from "../components/ItemHoje";
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../context/Context";
 
 export default function Hoje() {
-
-
-  const [buscarHabitos, setBuscarHabitos] = useState([]);
+  const { token, todaysHabitsList, setTodaysHabitsList } = useContext(Context);
 
   const diaDaSemanaCompleto = dayjs().locale("pt-br").format("dddd");
   const diaMes = dayjs().locale("pt-br").format("DD/MM");
@@ -21,8 +20,30 @@ export default function Hoje() {
   const diaDaSemana =
     stringSemanaMinuscula[0].toUpperCase() + stringSemanaMinuscula.substring(1);
 
+  useEffect(() => {
+    const URL =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/today";
 
-   console.log('buscarHabitos::', buscarHabitos)
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promise = axios.get(URL, config);
+
+    promise.then((resposta) => {
+      setTodaysHabitsList(resposta.data);
+      console.log("resposta get em HOJE pelo useEffect:", resposta.data);
+    });
+
+    promise.catch((erro) => {
+      alert(erro.response.data.message);
+      console.log("ERRO get em HOJE pelo useEffect:", erro);
+    });
+  }, []);
+
+  console.log("lista de today:", todaysHabitsList);
 
   return (
     <>
@@ -32,12 +53,18 @@ export default function Hoje() {
         <h2>
           {diaDaSemana}, {diaMes}
         </h2>
-        <h3>67% dos hábitos concluídos</h3>
+        <h3>X% dos hábitos concluídos</h3>
 
-        <ItemHoje />
-        <ItemHoje />
-        <ItemHoje />
-        
+        {todaysHabitsList.map((today) => (
+          <ItemHoje
+            key={today.id}
+            currentSequence={today.currentSequence}
+            done={today.done}
+            highestSequence={today.highestSequence}
+            id={today.id}
+            name={today.name}
+          />
+        ))}
       </DivContainer>
 
       <Menu />

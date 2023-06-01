@@ -1,19 +1,21 @@
 import styled from "styled-components";
 
-export default function ItemHoje() {
+export default function ItemHoje(props) {
+  const { currentSequence, done, highestSequence, id, name } = props;
+
   return (
     <DivItemHoje>
       <DivItemLeft>
-        <h4>Ler 1 capítulo de livro</h4>
+        <h4>{name}</h4>
         <p>
-          Sequência atual: <span style={{ color: "#8FC549" }}>4 dias</span>
+          Sequência atual: <span style={{ color: "#8FC549" }}>{currentSequence}</span>
         </p>
         <p>
-          Seu recorde: <span>5 dias</span>
+          Seu recorde: <span>{highestSequence}</span>
         </p>
       </DivItemLeft>
       <DivItemRight>
-        <div>
+        <div ischeck={done}>
           <ion-icon name="checkmark-sharp"></ion-icon>
         </div>
       </DivItemRight>
@@ -52,7 +54,9 @@ const DivItemRight = styled.div`
   margin-right: 10px;
 
   div {
-    background-color: #8fc549;
+    /* background-color: #8fc549; */
+    background-color: ${(props) =>
+    props.ischeck ? "#8fc549" : "#EBEBEB"};
     width: 70px;
     height: 70px;
     border-radius: 5px;
@@ -62,7 +66,7 @@ const DivItemRight = styled.div`
   }
 
   ion-icon {
-    color: #FFFFFF;
+    color: #ffffff;
     font-size: 40px;
   }
 `;

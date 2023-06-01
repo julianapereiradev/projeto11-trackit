@@ -16,6 +16,7 @@ export default function App() {
   const [add, setAdd] = useState(false)
   const [habitsList, setHabitsList] = useState([])
   const [days, setDays] = useState([])
+  const [todaysHabitsList, setTodaysHabitsList] = useState([])
 
 
   
@@ -35,6 +36,8 @@ export default function App() {
       setHabitsList,
       days,
       setDays,
+      todaysHabitsList, 
+      setTodaysHabitsList
     }}>
     <BrowserRouter>
       <Routes>
