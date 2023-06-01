@@ -9,10 +9,10 @@ import { Context } from "../context/Context";
 export default function Cadastro() {
 
   const {
+    disable,
+    setDisable,
     image,
-    setImage,
-    enabled,
-    setEnabled
+    setImage
   } = useContext(Context)
 
   const navigate = useNavigate();
@@ -23,70 +23,69 @@ export default function Cadastro() {
 
   function RegisterUser(e) {
     e.preventDefault();
-    setEnabled(true)
+    setDisable(true)
 
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/sign-up";
 
-    const novo = { email, name, image, password };
+    const novocadastro = { email, name, image, password };
 
-    const promise = axios.post(URL, novo);
+    const promise = axios.post(URL, novocadastro);
 
     promise.then((resposta) => {
-      console.log("resposta.data", resposta.data);
+      console.log("resposta.data em: POST no Cadastro:", resposta.data);
       navigate("/");
-      setEnabled(false)
+      setDisable(false)
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
-      // alert(erro.response.data.message);
-      setEnabled(false)
-      console.log("ERRO DE CADASTRO AQUI:", erro);
+      setDisable(false)
+      console.log("erro em: POST no Cadastro:", erro);
     });
   }
 
   return (
-    <DivLoginContainer onSubmit={RegisterUser}>
+    <FormRegisterContainer onSubmit={RegisterUser}>
 
       <img src={logo} />
       <p>TrackIt</p>
 
       <input
         type="email"
-        placeholder="email"
+        placeholder="  email"
         required
-        disabled={enabled}
+        disabled={disable}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
-        placeholder="senha"
+        placeholder="  senha"
         required
-        disabled={enabled}
+        disabled={disable}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
       <input
         type="text"
-        placeholder="nome"
+        placeholder="  nome"
         required
-        disabled={enabled}
+        disabled={disable}
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
       <input
         type="url"
-        placeholder="foto"
+        placeholder="  foto"
         required
-        disabled={enabled}
+        disabled={disable}
         value={image}
         onChange={(e) => setImage(e.target.value)}
       />
 
-      <button type="submit" disabled={enabled}>
-        {enabled ? (
+      <button type="submit" disabled={disable}>
+        {disable ? (
           <ThreeDots 
           type="ThreeDots" 
           color="#fff" 
@@ -98,19 +97,21 @@ export default function Cadastro() {
         )}
       </button>
 
-      <Link to={`/`} style={{ color: "#52b6ff", fontSize: "14px" }}>
+      <LinkToLogin to={`/`}>
         Já tem uma conta? Faça login!
-      </Link>
-    </DivLoginContainer>
+      </LinkToLogin>
+
+    </FormRegisterContainer>
   );
 }
 
-const DivLoginContainer = styled.form`
+const FormRegisterContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 70px;
+  padding: 30px;
 
   img {
     width: 180px;
@@ -125,7 +126,7 @@ const DivLoginContainer = styled.form`
 
   button {
     height: 45px;
-    width: 303px;
+    width: 100%;
     font-size: 21px;
     margin-bottom: 30px;
     background-color: #52B6FF ;
@@ -136,5 +137,11 @@ const DivLoginContainer = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 `;
+
+export const LinkToLogin = styled(Link)`
+ color: #52b6ff;
+ font-Size: 14px;
+`

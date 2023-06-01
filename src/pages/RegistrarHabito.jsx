@@ -14,8 +14,8 @@ const {reloadAfterAddOrDelete} = props
     token,
     name,
     setName,
-    enabled,
-    setEnabled,
+    disable,
+    setDisable,
     days,
     setDays,
   } = useContext(Context);
@@ -40,7 +40,7 @@ const {reloadAfterAddOrDelete} = props
   console.log("name aqui:", name);
 
   function adicionar() {
-    setEnabled(true);
+    setDisable(true);
 
     if (days.length > 0 && name.length > 0) {
       const URL =
@@ -63,18 +63,18 @@ const {reloadAfterAddOrDelete} = props
         setName("");
         setAdd(false);
         reloadAfterAddOrDelete()
-        setEnabled(false);
+        setDisable(false);
         //function recarregar pag toda vez q um novo dia é adc
       });
 
       promise.catch((erro) => {
         alert(erro.response.data.message);
-        setEnabled(false);
+        setDisable(false);
         console.log("ERRO DE ADICIONAR HABITO AQUI:", erro);
       });
     } else {
       alert("Escreve o nome do hábito e escolha pelo menos um dia da semana");
-      setEnabled(false);
+      setDisable(false);
     }
   }
 
@@ -89,7 +89,7 @@ const {reloadAfterAddOrDelete} = props
         required
         value={name}
         onChange={(e) => setName(e.target.value)}
-        disabled={enabled}
+        disabled={disable}
         placeholder="nome do hábito"
       />
 
@@ -98,7 +98,7 @@ const {reloadAfterAddOrDelete} = props
           <ButtonDays
             key={buttonDia.id}
             id={buttonDia.id}
-            disabled={enabled}
+            disabled={disable}
             daysW={days.includes(buttonDia.id)}
             onClick={() => cliqueiDiaSemana(buttonDia.id)}
           >
@@ -109,8 +109,8 @@ const {reloadAfterAddOrDelete} = props
 
       <Buttons>
         <ButtonCancelar onClick={cancelar}>Cancelar</ButtonCancelar>
-        <ButtonAdicionar type="submit" disabled={enabled} onClick={adicionar}>
-          {enabled ? (
+        <ButtonAdicionar type="submit" disabled={disable} onClick={adicionar}>
+          {disable ? (
             <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
           ) : (
             "Salvar"

@@ -11,7 +11,7 @@ export default function App() {
 
   const [token, setToken] = useState('')
   const [image, setImage] = useState('')
-  const [enabled, setEnabled] = useState(false)
+  const [disable, setDisable] = useState(false)
   const [name, setName] = useState('')
   const [add, setAdd] = useState(false)
   const [habitsList, setHabitsList] = useState([])
@@ -25,8 +25,8 @@ export default function App() {
       setToken,
       image,
       setImage,
-      enabled,
-      setEnabled,
+      disable,
+      setDisable,
       name,
       setName,
       add,

@@ -13,12 +13,14 @@ const GlobalStyle = createGlobalStyle`
 		border: 1px solid #D4D4D4;
 		border-radius: 5px;
 		height: 45px;
+		width: 100%;
 		margin-bottom: 7px;
 		font-family: 'Roboto';
 		font-size: 20px;
 		display: flex;
 		align-items: center;
-		padding-left: 10px;
+		
+		
 		font-family: 'Lexend Deca', sans-serif;
 		&::placeholder{
 			font-style: normal;
@@ -27,14 +29,6 @@ const GlobalStyle = createGlobalStyle`
 			font-weight: 500;
 		}	
 	}
-
-	/* button {
-		background-color: #52B6FF ;
-		color: #FFFFFF;
-		font-family: 'Lexend Deca', sans-serif;
-		border-radius: 5px;
-		border: none;
-	} */
 `
 
 export default GlobalStyle

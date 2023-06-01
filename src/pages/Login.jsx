@@ -9,10 +9,10 @@ import { ThreeDots } from "react-loader-spinner";
 export default function Login() {
 
   const {
-    setImage,
-    enabled,
-    setEnabled,
+    disable,
+    setDisable,
     setToken,
+    setImage,
   } = useContext(Context)
 
   const navigate = useNavigate();
@@ -23,58 +23,55 @@ export default function Login() {
 
   function LoginUser(e) {
     e.preventDefault();
-    setEnabled(true)
+    setDisable(true)
 
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/auth/login";
 
-    const novo = { email, password };
+    const novologin = { email, password };
 
-    const promise = axios.post(URL, novo);
+    const promise = axios.post(URL, novologin);
 
       promise.then((resposta) => {
-      console.log("resposta.data", resposta.data);
+      console.log("resposta.data em: POST no Login:", resposta.data);
       setImage(resposta.data.image)
       setToken(resposta.data.token)
       navigate("/hoje");
-      setEnabled(false)
+      setDisable(false)
     });
 
     promise.catch((erro) => {
       alert(erro.response.data.message);
-      // alert(erro.response.data.message);
-      setEnabled(false)
-      console.log("ERRO DE CADASTRO AQUI:", erro);
+      setDisable(false)
+      console.log("erro em: POST no Login:", erro);
     });
   }
 
-
-
   return (
-    <DivLoginContainer onSubmit={LoginUser}>
+    <FormLoginContainer onSubmit={LoginUser}>
 
       <img src={logo} />
       <p>TrackIt</p>
 
       <input
         type="email"
-        placeholder="email"
+        placeholder="  email"
         required
-        disabled={enabled}
+        disabled={disable}
         value={email}
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
         type="password"
-        placeholder="senha"
+        placeholder="  senha"
         required
-        disabled={enabled}
+        disabled={disable}
         value={password}
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="submit" disabled={enabled}>
-        {enabled ? (
+      <button type="submit" disabled={disable}>
+        {disable ? (
           <ThreeDots 
           type="ThreeDots" 
           color="#fff" 
@@ -86,19 +83,21 @@ export default function Login() {
         )}
       </button>
 
-      <Link to={`/cadastro`} style={{ color: "#52b6ff", fontSize: "14px" }}>
+      <LinkToRegister to={`/cadastro`} >
         Não tem uma conta? Cadastre-se!
-      </Link>
-    </DivLoginContainer>
+      </LinkToRegister>
+
+    </FormLoginContainer>
   );
 }
 
-const DivLoginContainer = styled.form`
+const FormLoginContainer = styled.form`
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-top: 70px;
+  padding: 30px;
 
   img {
     width: 180px;
@@ -113,7 +112,7 @@ const DivLoginContainer = styled.form`
 
   button {
     height: 45px;
-    width: 303px;
+    width: 100%;
     font-size: 21px;
     margin-bottom: 30px;
     background-color: #52B6FF ;
@@ -124,5 +123,11 @@ const DivLoginContainer = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
+    cursor: pointer;
   }
 `;
+
+export const LinkToRegister = styled(Link)`
+ color: #52b6ff;
+ font-Size: 14px;
+`
