@@ -17,7 +17,7 @@ export default function App() {
   const [habitsList, setHabitsList] = useState([])
   const [days, setDays] = useState([])
   const [todaysHabitsList, setTodaysHabitsList] = useState([])
-
+  const [totalVerdadeiros, setTotalVerdadeiros] = useState(0)
   
   return (
     <Context.Provider value={{
@@ -37,6 +37,8 @@ export default function App() {
       setDays,
       todaysHabitsList, 
       setTodaysHabitsList,
+      totalVerdadeiros, 
+      setTotalVerdadeiros
     }}>
     <BrowserRouter>
       <Routes>

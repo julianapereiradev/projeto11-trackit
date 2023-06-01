@@ -5,7 +5,7 @@ import axios from "axios";
 
 export default function ItemHoje(props) {
   const { currentSequence, done, highestSequence, id, name, today } = props;
-  const { token, setTodaysHabitsList } = useContext(Context);
+  const { token, setTodaysHabitsList, setTotalVerdadeiros } = useContext(Context);
 
   const [isChecked, setIsChecked] = useState(done);
 
@@ -23,6 +23,7 @@ export default function ItemHoje(props) {
 
     promise.then((resposta) => {
       setTodaysHabitsList(resposta.data);
+      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true))
       console.log(
         "resposta.data do get RELOAD DPS DE Marcar/Desmarcar",
         resposta.data

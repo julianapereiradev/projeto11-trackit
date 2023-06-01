@@ -9,7 +9,13 @@ import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/Context";
 
 export default function Hoje() {
-  const { token, todaysHabitsList, setTodaysHabitsList } = useContext(Context);
+  const { 
+    token, 
+    todaysHabitsList, 
+    setTodaysHabitsList, 
+    totalVerdadeiros, 
+    setTotalVerdadeiros
+  } = useContext(Context);
 
   const diaDaSemanaCompleto = dayjs().locale("pt-br").format("dddd");
   const diaMes = dayjs().locale("pt-br").format("DD/MM");
@@ -34,6 +40,7 @@ export default function Hoje() {
 
     promise.then((resposta) => {
       setTodaysHabitsList(resposta.data);
+      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true))
       console.log("resposta get em HOJE pelo useEffect:", resposta.data);
     });
 
@@ -43,7 +50,21 @@ export default function Hoje() {
     });
   }, []);
 
-  console.log("lista de today:", todaysHabitsList);
+
+//aqui funciona
+// const apenasVerdadeiross = todaysHabitsList.filter((i) => i.done)
+// console.log('apenas verdadeiros', apenasVerdadeiross.length)
+
+// console.log("todaysHabitsList mostra lista de today atualizada:", todaysHabitsList);
+//  console.log("qtd de itens:", todaysHabitsList.length);
+
+// const totaal = (Number(apenasVerdadeiross.length)/Number(todaysHabitsList.length))*100
+// console.log('TOTAAAAAL:', totaal)
+
+// console.log('total aqui:', total)
+
+console.log('todaysHabitsList em hoje:', todaysHabitsList)
+console.log('totalVerdadeiros em hoje:', totalVerdadeiros.length)
 
   return (
     <>
@@ -53,7 +74,9 @@ export default function Hoje() {
         <h2>
           {diaDaSemana}, {diaMes}
         </h2>
-        <h3>X% dos hábitos concluídos</h3>
+
+
+        <h3>{((Number(totalVerdadeiros.length))/(Number(todaysHabitsList.length)))*100}% dos hábitos concluídos</h3>
 
         {todaysHabitsList.map((today) => (
           <ItemHoje
@@ -74,7 +97,7 @@ export default function Hoje() {
 }
 
 const DivContainer = styled.div`
-  margin-top: 80px; /* Altura da navbar + espaço de margem */
+  margin-top: 80px;
   margin-left: 10px;
   margin-right: 10px;
 
