@@ -16,14 +16,14 @@ export default function Menu() {
   return (
     <>
       <DivMenu>
-        <Link
-          style={{ color: "#52B6FF", textDecoration: "none" }}
+        <LinkMenu
+          
           to={`/habitos`}
         >
           Hábitos
-        </Link>
+        </LinkMenu>
 
-          <div style={{ width: "17%" }}>
+          <DivCircular>
             <Link to={`/hoje`}>
             <CircularProgressbar
               value={percentage}
@@ -38,14 +38,13 @@ export default function Menu() {
               })}
             />
             </Link>
-          </div>
+          </DivCircular>
 
-        <Link
-          style={{ color: "#52B6FF", textDecoration: "none" }}
+        <LinkMenu
           to={`/historico`}
         >
           Histórico
-        </Link>
+        </LinkMenu>
         
       </DivMenu>
     </>
@@ -65,3 +64,16 @@ const DivMenu = styled.div`
   justify-content: space-around;
   align-items: center;
 `;
+
+const DivCircular = styled.div`
+ width: 91px;
+ margin-Bottom: 40px;
+`;
+
+export const LinkMenu = styled(Link)`
+ color: #52b6ff;
+ font-Size: 14px;
+ text-decoration: none;
+ font-size: 18px;
+
+`
