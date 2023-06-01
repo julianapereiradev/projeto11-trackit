@@ -3,9 +3,10 @@ import Topo from "../components/Topo";
 import Menu from "../components/Menu";
 // import ItemHabitos from "../components/ItemHabitos";
 // import CriarHabito from "../components/CriarHabito";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { Context } from "../context/Context";
 import ListaHabitos from "./ListaHabitos";
+import axios from "axios";
 
 export default function Habitos() {
 
@@ -19,6 +20,30 @@ export default function Habitos() {
     enabled,
     setEnabled,
   } = useContext(Context)
+
+  useEffect(() => {
+    const URL =
+    "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
+  const config = {
+    headers: {
+      Authorization: `Bearer ${token}`,
+    },
+  };
+
+  const promise = axios.get(URL, config);
+
+  promise.then((resposta) => {
+    setHabitsList(resposta.data);
+    console.log("resposta.data do get no USEEFFECT:", resposta.data);
+  });
+
+  promise.catch((erro) => {
+    alert(erro.response.data.message);
+    console.log("ERRO DE do get no USEEFFECT:", erro);
+  });
+  
+  },[])
 
   
   return (
