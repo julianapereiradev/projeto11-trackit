@@ -88,26 +88,18 @@ export default function ItemHoje(props) {
       <DivItemLeft>
         <h4>{name}</h4>
         <p>
-          Sequência atual:{" "}
-          <span style={{ color: "#8FC549" }}>{currentSequence}</span>
+          Sequência atual: <span style={{ color: "#8FC549" }}>{currentSequence}</span>
         </p>
         <p>
           Seu recorde: <span>{highestSequence}</span>
         </p>
       </DivItemLeft>
-      
-      <CheckboxContainer>
-        <HiddenCheckbox checked={isChecked} onChange={handleChange} />
+
+      <CheckboxButton onClick={handleChange} checked={isChecked}>
         <Checkmark checked={isChecked}>
           <ion-icon name="checkmark-sharp"></ion-icon>
         </Checkmark>
-      </CheckboxContainer>
-
-      {/* <DivItemRight>
-        <div ischeck={done} onClick={() => cliqueiCheck(done)}>
-          <ion-icon name="checkmark-sharp"></ion-icon>
-        </div>
-      </DivItemRight> */}
+      </CheckboxButton>
     </DivItemHoje>
   );
 }
@@ -139,47 +131,12 @@ const DivItemLeft = styled.div`
   }
 `;
 
-// const DivItemRight = styled.div`
-//   margin-right: 10px;
-
-//   div {
-//     /* background-color: #8fc549; */
-//     background-color: ${(props) => (props.ischeck ? "#8fc549" : "#EBEBEB")};
-//     width: 70px;
-//     height: 70px;
-//     border-radius: 5px;
-//     display: flex;
-//     justify-content: center;
-//     align-items: center;
-//   }
-
-//   ion-icon {
-//     color: #ffffff;
-//     font-size: 40px;
-//   }
-// `;
-
-const CheckboxContainer = styled.label`
-  display: inline-block;
-  position: relative;
-  padding-left: 45px;
-  cursor: pointer;
-`;
-
-const HiddenCheckbox = styled.input.attrs({ type: "checkbox" })`
-  position: absolute;
-  opacity: 0;
-  cursor: pointer;
-  width: 40px;
-  height: 40px;
+const CheckboxButton = styled.button`
+  background-color: ${(props) => (props.checked ? "green" : "red")};
+  margin-right: 10px;
 `;
 
 const Checkmark = styled.span`
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 40px;
-  width: 40px;
   background-color: ${(props) => (props.checked ? "green" : "red")};
 
   ion-icon {
