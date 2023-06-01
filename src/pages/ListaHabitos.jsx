@@ -17,7 +17,7 @@ export default function ListaHabitos() {
     setEnabled,
   } = useContext(Context);
 
-  function reloadAfterAdd() {
+  function reloadAfterAddOrDelete() {
     const URL =
       "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
 
@@ -44,7 +44,7 @@ export default function ListaHabitos() {
 
   return (
     <HabitsList>
-      {add && <RegistrarHabito reloadAfterAdd={reloadAfterAdd} />}
+      {add && <RegistrarHabito reloadAfterAddOrDelete={reloadAfterAddOrDelete} />}
 
       {habitsList.length > 0 ? (
         habitsList.map((item) => (
@@ -53,7 +53,7 @@ export default function ListaHabitos() {
             id={item.id}
             name={item.name}
             days={item.days}
-            reloadAfterAdd={reloadAfterAdd}
+            reloadAfterAddOrDelete={reloadAfterAddOrDelete}
             />
         ))
       ) : (

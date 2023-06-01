@@ -7,7 +7,7 @@ import axios from "axios";
 
 export default function RegistrarHabito(props) {
 
-const {reloadAfterAdd} = props
+const {reloadAfterAddOrDelete} = props
 
   const {
     add,
@@ -66,7 +66,7 @@ const {reloadAfterAdd} = props
         setDays([]);
         setName("");
         setAdd(false);
-        reloadAfterAdd()
+        reloadAfterAddOrDelete()
         setEnabled(false);
         //function recarregar pag toda vez q um novo dia é adc
       });

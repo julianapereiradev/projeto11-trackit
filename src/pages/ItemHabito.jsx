@@ -3,19 +3,46 @@ import styled from "styled-components";
 import { Context } from "../context/Context";
 import diasDaSemana from "../constants/diasdasemana";
 import { TrashOutline } from "react-ionicons";
+import axios from "axios";
 
 export default function ItemHabito(props) {
   const { add, setAdd, token, setToken, habitsList, setHabitsList } =
     useContext(Context);
 
-  const { id, name, days, reloadAfterAdd } = props;
+  const { id, name, days, reloadAfterAddOrDelete } = props;
+
+function deletarItemHabito(id) {
+    if (window.confirm("Tem certeza que quer deletar este item?")) {
+        
+        const URL =
+        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+  
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      };
+  
+      const promise = axios.delete(URL, config);
+  
+      promise.then(reloadAfterAddOrDelete);
+  
+      promise.catch((erro) => {
+        alert(erro.response.data.message);
+        console.log("erro no momento de deletarItemHabito:", erro);
+      });
+
+      } else {
+        console.log('Cancelou a ação')
+      }
+}
 
   return (
     <Habit>
       <InfoHabits>
         <Inline>
           <h1>{name}</h1>
-          <TrashIcon></TrashIcon>
+          <TrashIcon onClick={() => deletarItemHabito(id)}></TrashIcon>
         </Inline>
 
         <Week>
