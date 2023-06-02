@@ -14,16 +14,13 @@ export default function Menu() {
   const percentage = ((Number(arrayDoneTrue.length))/(Number(todayList.length)))*100;
 
   return (
-    <>
-      <DivMenu>
-        <LinkMenu
-          
-          to={`/habitos`}
-        >
+      <DivMenu data-test="menu">
+
+        <LinkMenu data-test="habit-link" to={`/habitos`}>
           Hábitos
         </LinkMenu>
 
-          <DivCircular>
+          <DivCircular data-test="today-link">
             <Link to={`/hoje`}>
             <CircularProgressbar
               value={percentage}
@@ -40,14 +37,11 @@ export default function Menu() {
             </Link>
           </DivCircular>
 
-        <LinkMenu
-          to={`/historico`}
-        >
+        <LinkMenu data-test="history-link" to={`/historico`}>
           Histórico
         </LinkMenu>
         
       </DivMenu>
-    </>
   );
 }
 

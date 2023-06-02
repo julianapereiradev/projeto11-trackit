@@ -101,17 +101,17 @@ export default function ItemHoje(props) {
   };
 
   return (
-    <DivItemHoje>
+    <DivItemHoje data-test="today-habit-container">
       
       <DivItemLeft>
-        <h4>{name}</h4>
-        <p>
+        <h4 data-test="today-habit-name">{name}</h4>
+        <p data-test="today-habit-sequence">
           Sequência atual:{" "}
           <SpanSequency colorsequency={isChecked}>
             {currentSequence} {currentSequence === 1 ? ('dia'):('dias')}
           </SpanSequency>
         </p>
-        <p>
+        <p data-test="today-habit-record">
           Seu recorde:{" "}
           <RecordSequency
             colorrecord={
@@ -124,6 +124,7 @@ export default function ItemHoje(props) {
       </DivItemLeft>
 
       <CheckboxButton 
+        data-test="today-habit-check-btn"
         onClick={handleChange} 
         checked={isChecked}
       >

@@ -52,6 +52,7 @@ export default function Cadastro() {
       <p>TrackIt</p>
 
       <input
+        data-test="email-input"
         type="email"
         placeholder="  email"
         required
@@ -60,6 +61,7 @@ export default function Cadastro() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
+        data-test="password-input"
         type="password"
         placeholder="  senha"
         required
@@ -68,6 +70,7 @@ export default function Cadastro() {
         onChange={(e) => setPassword(e.target.value)}
       />
       <input
+        data-test="user-name-input"
         type="text"
         placeholder="  nome"
         required
@@ -76,6 +79,7 @@ export default function Cadastro() {
         onChange={(e) => setName(e.target.value)}
       />
       <input
+        data-test="user-image-input"
         type="url"
         placeholder="  foto"
         required
@@ -84,7 +88,7 @@ export default function Cadastro() {
         onChange={(e) => setImage(e.target.value)}
       />
 
-      <button type="submit" disabled={disable}>
+      <button data-test="signup-btn" type="submit" disabled={disable}>
         {disable ? (
           <ThreeDots 
           type="ThreeDots" 
@@ -97,7 +101,7 @@ export default function Cadastro() {
         )}
       </button>
 
-      <LinkToLogin to={`/`}>
+      <LinkToLogin data-test="login-link" to={`/`}>
         Já tem uma conta? Faça login!
       </LinkToLogin>
 

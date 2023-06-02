@@ -82,11 +82,12 @@ const {reloadAfterAddOrDelete} = props
   }
 
   return (
-    <DivAddHabito>
+    <DivAddHabito data-test="habit-create-container">
 
       <div>
         <DivInput>
       <input
+        data-test="habit-name-input"
         type="text"
         required
         value={name}
@@ -101,6 +102,7 @@ const {reloadAfterAddOrDelete} = props
         <ListCalendar>
         {diasDaSemana.map((buttonDia) => (
           <ButtonCalendar
+            data-test="habit-day"
             key={buttonDia.id}
             id={buttonDia.id}
             disabled={disable}
@@ -115,8 +117,20 @@ const {reloadAfterAddOrDelete} = props
 
       <div>
         <ListButtons>
-        <ButtonCancelar disabled={disable} onClick={() => setRenderAdd(false)}>Cancelar</ButtonCancelar>
-        <ButtonAdicionar type="submit" disabled={disable} onClick={adicionar}>
+        <ButtonCancelar 
+        data-test="habit-create-cancel-btn"
+        disabled={disable} 
+        onClick={() => setRenderAdd(false)}
+        >
+          Cancelar
+        </ButtonCancelar>
+
+        <ButtonAdicionar 
+        data-test="habit-create-save-btn"
+        type="submit" 
+        disabled={disable} 
+        onClick={adicionar}
+        >
           {disable ? (
             <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
           ) : (

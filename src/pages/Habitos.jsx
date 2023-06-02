@@ -80,7 +80,7 @@ export default function Habitos() {
 
         <DivAdcHabito>
           <h2>Meus Hábitos</h2>
-          <button onClick={() => setRenderAdd(true)}>+</button>
+          <button data-test="habit-create-btn" onClick={() => setRenderAdd(true)}>+</button>
         </DivAdcHabito>
 
         <DivContainerListaHabitos>

@@ -7,7 +7,7 @@ export default function Topo() {
 const {image} = useContext(Context)
 
     return (
-        <DivTopo>
+        <DivTopo data-test="header">
         <p>TrackIt</p>
         <img src={image} />
       </DivTopo>

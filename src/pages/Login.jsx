@@ -54,6 +54,7 @@ export default function Login() {
       <p>TrackIt</p>
 
       <input
+        data-test="email-input"
         type="email"
         placeholder="  email"
         required
@@ -62,6 +63,7 @@ export default function Login() {
         onChange={(e) => setEmail(e.target.value)}
       />
       <input
+        data-test="password-input"
         type="password"
         placeholder="  senha"
         required
@@ -70,7 +72,7 @@ export default function Login() {
         onChange={(e) => setPassword(e.target.value)}
       />
 
-      <button type="submit" disabled={disable}>
+      <button data-test="login-btn" type="submit" disabled={disable}>
         {disable ? (
           <ThreeDots 
           type="ThreeDots" 
@@ -83,7 +85,7 @@ export default function Login() {
         )}
       </button>
 
-      <LinkToRegister to={`/cadastro`} >
+      <LinkToRegister data-test="signup-link" to={`/cadastro`} >
         Não tem uma conta? Cadastre-se!
       </LinkToRegister>
 

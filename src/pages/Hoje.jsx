@@ -55,11 +55,9 @@ export default function Hoje() {
       <Topo />
 
       <DivContainer>
-        <h2>
-          {diaDaSemana}, {diaMes}
-        </h2>
+        <h2 data-test="today">{diaDaSemana}, {diaMes} </h2>
 
-        <div>
+        <div data-test="today-counter">
           {arrayDoneTrue.length === 0 ? (
             <ColorTitlePercentage isPercentageZero={arrayDoneTrue.length === 0}>
               Nenhum hábito concluído ainda

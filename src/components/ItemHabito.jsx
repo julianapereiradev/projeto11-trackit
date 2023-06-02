@@ -38,16 +38,17 @@ export default function ItemHabito(props) {
   }
 
   return (
-    <DivContainerFinishHabits>
+    <DivContainerFinishHabits data-test="habit-container">
       
         <FirstLine>
-          <h1>{name}</h1>
-          <DeleteIcon onClick={() => deletarItemHabito(id)}><ion-icon name="trash-outline"></ion-icon></DeleteIcon>
+          <h1 data-test="habit-name">{name}</h1>
+          <DeleteIcon data-test="habit-delete-btn" onClick={() => deletarItemHabito(id)}><ion-icon name="trash-outline"></ion-icon></DeleteIcon>
         </FirstLine>
 
         <SecondLine>
           {diasDaSemana.map((buttonDia) => (
             <ButtonCalendar
+              data-test="habit-day"
               key={buttonDia.id}
               id={buttonDia.id}
               daysIncludes={days.includes(buttonDia.id)}
