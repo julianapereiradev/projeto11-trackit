@@ -49,7 +49,7 @@ export default function ItemHoje(props) {
     });
   }
 
-  const handleChange = async () => {
+  function CheckOrUncheck() {
     if (isChecked) {
       const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}/uncheck`;
 
@@ -125,12 +125,10 @@ export default function ItemHoje(props) {
 
       <CheckboxButton 
         data-test="today-habit-check-btn"
-        onClick={handleChange} 
+        onClick={CheckOrUncheck} 
         checked={isChecked}
       >
-        <Checkmark checked={isChecked}>
           <ion-icon name="checkmark-sharp"></ion-icon>
-        </Checkmark>
       </CheckboxButton>
     </DivItemHoje>
   );
@@ -171,17 +169,17 @@ const CheckboxButton = styled.button`
   border-radius: 5px;
   border: none;
   cursor: pointer;
+
+  ion-icon {
+    color: #ffffff;
+    font-size: 50px;
+  }
 `;
 
 const Checkmark = styled.span`
   background-color: ${(props) => (props.checked ? "#8FC549" : "#EBEBEB")};
   width: 70px;
   height: 70px;
-
-  ion-icon {
-    color: #ffffff;
-    font-size: 50px;
-  }
 `;
 
 const SpanSequency = styled.span`
