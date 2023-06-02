@@ -9,7 +9,7 @@ const {image} = useContext(Context)
     return (
         <DivTopo data-test="header">
         <p>TrackIt</p>
-        <img src={image} />
+        <img data-test="avatar" src={image} />
       </DivTopo>
     )
 }
