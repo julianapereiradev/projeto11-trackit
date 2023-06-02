@@ -2,7 +2,6 @@ import { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../context/Context";
 import diasDaSemana from "../constants/diasdasemana";
-import { TrashOutline } from "react-ionicons";
 import axios from "axios";
 
 export default function ItemHabito(props) {

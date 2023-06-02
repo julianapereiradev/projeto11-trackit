@@ -3,11 +3,13 @@ import Topo from "../components/Topo";
 import Menu from "../components/Menu";
 import { useContext, useEffect } from "react";
 import { Context } from "../context/Context";
-import ListaHabitos from "./ListaHabitos";
 import axios from "axios";
 
+import RegistrarHabito from "./RegistrarHabito";
+import ItemHabito from "./ItemHabito";
+
 export default function Habitos() {
-  const { setAdd, token, setHabitsList } = useContext(Context);
+  const { setAdd, token, setHabitsList, add, habitsList } = useContext(Context);
 
   useEffect(() => {
     const URL =
@@ -35,17 +37,69 @@ export default function Habitos() {
     });
   }, []);
 
+  function reloadAfterAddOrDelete() {
+    const URL =
+      "https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits";
+
+    const config = {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    };
+
+    const promise = axios.get(URL, config);
+
+    promise.then((resposta) => {
+      setHabitsList(resposta.data);
+      console.log(
+        "resposta.data em: GET no Habitos para recarregar lista Habitos:",
+        resposta.data
+      );
+    });
+
+    promise.catch((erro) => {
+      alert(erro.response.data.message);
+      console.log(
+        "erro em: GET no Habitos para recarregar lista Habitos:",
+        erro
+      );
+    });
+  }
+
   return (
     <>
       <Topo />
 
       <DivContainer>
+
         <DivAdcHabito>
           <h2>Meus Hábitos</h2>
           <button onClick={() => setAdd(true)}>+</button>
         </DivAdcHabito>
 
-        <ListaHabitos />
+        <DivContainerListaHabitos>
+          {add && (
+            <RegistrarHabito reloadAfterAddOrDelete={reloadAfterAddOrDelete} />
+          )}
+
+          {habitsList.length > 0 ? (
+            habitsList.map((item) => (
+              <ItemHabito
+                key={item.id}
+                id={item.id}
+                name={item.name}
+                days={item.days}
+                reloadAfterAddOrDelete={reloadAfterAddOrDelete}
+              />
+            ))
+          ) : (
+            <p>
+              Você não tem nenhum hábito cadastrado ainda. Adicione um hábito
+              para começar a trackear!
+            </p>
+          )}
+        </DivContainerListaHabitos>
+
       </DivContainer>
 
       <Menu />
@@ -55,6 +109,7 @@ export default function Habitos() {
 
 const DivContainer = styled.div`
   padding: 30px;
+  margin-bottom: 80px;
 `;
 
 const DivAdcHabito = styled.div`
@@ -82,5 +137,19 @@ const DivAdcHabito = styled.div`
     color: #126ba5;
     font-weight: 400;
     font-size: 23px;
+  }
+`;
+
+export const DivContainerListaHabitos = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  p {
+    font-family: "Lexend Deca";
+    font-size: 18px;
+    color: #666666;
+    line-height: 22px;
   }
 `;

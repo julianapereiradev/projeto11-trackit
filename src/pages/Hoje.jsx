@@ -89,6 +89,7 @@ export default function Hoje() {
 
 const DivContainer = styled.div`
   padding: 10px;
+  margin-bottom: 80px;
 
   h2 {
     color: #126ba5;
