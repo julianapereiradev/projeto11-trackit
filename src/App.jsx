@@ -9,15 +9,15 @@ import { useState } from "react";
 
 export default function App() {
 
-  const [token, setToken] = useState('')
   const [image, setImage] = useState('')
-  const [disable, setDisable] = useState(false)
-  const [name, setName] = useState('')
-  const [add, setAdd] = useState(false)
+  const [token, setToken] = useState('') 
+  const [disable, setDisable] = useState(false) 
+  const [renderAdd, setRenderAdd] = useState(false) 
   const [habitsList, setHabitsList] = useState([])
-  const [days, setDays] = useState([])
-  const [todaysHabitsList, setTodaysHabitsList] = useState([])
-  const [totalVerdadeiros, setTotalVerdadeiros] = useState(0)
+  const [todayList, setTodayList] = useState([]) 
+  const [arrayDoneTrue, setArrayDoneTrue] = useState(0) 
+  const [name, setName] = useState(""); //para pegar no cancelar 
+  const [days, setDays] = useState([]); //para pegar no cancelar
   
   return (
     <Context.Provider value={{
@@ -27,18 +27,18 @@ export default function App() {
       setImage,
       disable,
       setDisable,
-      name,
-      setName,
-      add,
-      setAdd,
+      renderAdd,
+      setRenderAdd,
       habitsList,
       setHabitsList,
-      days,
-      setDays,
-      todaysHabitsList, 
-      setTodaysHabitsList,
-      totalVerdadeiros, 
-      setTotalVerdadeiros
+      todayList, 
+      setTodayList,
+      arrayDoneTrue, 
+      setArrayDoneTrue,
+      name, 
+      setName,
+      days, 
+      setDays
     }}>
     <BrowserRouter>
       <Routes>

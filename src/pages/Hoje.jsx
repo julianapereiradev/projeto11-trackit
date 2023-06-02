@@ -9,13 +9,8 @@ import { useContext, useEffect } from "react";
 import { Context } from "../context/Context";
 
 export default function Hoje() {
-  const {
-    token,
-    todaysHabitsList,
-    setTodaysHabitsList,
-    totalVerdadeiros,
-    setTotalVerdadeiros,
-  } = useContext(Context);
+  const { token, todayList, setTodayList, arrayDoneTrue, setArrayDoneTrue } =
+    useContext(Context);
 
   const diaDaSemanaCompleto = dayjs().locale("pt-br").format("dddd");
   const diaMes = dayjs().locale("pt-br").format("DD/MM");
@@ -39,9 +34,12 @@ export default function Hoje() {
     const promise = axios.get(URL, config);
 
     promise.then((resposta) => {
-      setTodaysHabitsList(resposta.data);
-      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true));
-      console.log("resposta.data em: GET no Hoje via useEffect:", resposta.data);
+      setTodayList(resposta.data);
+      setArrayDoneTrue(resposta.data.filter((i) => i.done == true));
+      console.log(
+        "resposta.data em: GET no Hoje via useEffect:",
+        resposta.data
+      );
     });
 
     promise.catch((erro) => {
@@ -49,6 +47,8 @@ export default function Hoje() {
       console.log("erro em: GET no Hoje via useEffect", erro);
     });
   }, []);
+
+  console.log("arrayDoneTrue aqui::", arrayDoneTrue);
 
   return (
     <>
@@ -59,17 +59,21 @@ export default function Hoje() {
           {diaDaSemana}, {diaMes}
         </h2>
 
-        <h3>
-          {totalVerdadeiros.length === 0
-            ? "Nenhum hábito concluído ainda"
-            : Math.floor(
-                (Number(totalVerdadeiros.length) /
-                  Number(todaysHabitsList.length)) *
-                  100
-              ) + "% dos hábitos concluídos"}
-        </h3>
+        <div>
+          {arrayDoneTrue.length === 0 ? (
+            <ColorTitlePercentage isPercentageZero={arrayDoneTrue.length === 0}>
+              Nenhum hábito concluído ainda
+            </ColorTitlePercentage>
+          ) : (
+            <ColorTitlePercentage isPercentageZero={arrayDoneTrue.length === 0}>
+              {Math.floor(
+                (Number(arrayDoneTrue.length) / Number(todayList.length)) * 100
+              ) + `% dos hábitos concluídos`}{" "}
+            </ColorTitlePercentage>
+          )}
+        </div>
 
-        {todaysHabitsList.map((today) => (
+        {todayList.map((today) => (
           <ItemHoje
             key={today.id}
             currentSequence={today.currentSequence}
@@ -105,4 +109,11 @@ const DivContainer = styled.div`
     font-weight: 500;
     margin-bottom: 30px;
   }
+`;
+
+const ColorTitlePercentage = styled.p`
+  font-size: 18px;
+  font-weight: 500;
+  margin-bottom: 30px;
+  color: ${(props) => (props.isPercentageZero ? "#BABABA" : "#8FC549")};
 `;

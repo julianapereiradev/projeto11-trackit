@@ -5,11 +5,17 @@ import { useContext, useEffect } from "react";
 import { Context } from "../context/Context";
 import axios from "axios";
 
-import RegistrarHabito from "../components/RegistrarHabito";
+import AddHabito from "../components/AddHabito";
 import ItemHabito from "../components/ItemHabito";
 
 export default function Habitos() {
-  const { setAdd, token, setHabitsList, add, habitsList } = useContext(Context);
+  const { 
+    renderAdd, 
+    setRenderAdd, 
+    token, 
+    habitsList, 
+    setHabitsList 
+  } = useContext(Context);
 
   useEffect(() => {
     const URL =
@@ -74,12 +80,12 @@ export default function Habitos() {
 
         <DivAdcHabito>
           <h2>Meus Hábitos</h2>
-          <button onClick={() => setAdd(true)}>+</button>
+          <button onClick={() => setRenderAdd(true)}>+</button>
         </DivAdcHabito>
 
         <DivContainerListaHabitos>
-          {add && (
-            <RegistrarHabito reloadAfterAddOrDelete={reloadAfterAddOrDelete} />
+          {renderAdd && (
+            <AddHabito reloadAfterAddOrDelete={reloadAfterAddOrDelete} />
           )}
 
           {habitsList.length > 0 ? (

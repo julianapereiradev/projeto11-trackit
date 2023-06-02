@@ -1,24 +1,28 @@
 import styled from "styled-components";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { Context } from "../context/Context";
 import { ThreeDots } from "react-loader-spinner";
 import diasDaSemana from "../data/diasdasemana";
 import axios from "axios";
 
-export default function RegistrarHabito(props) {
+export default function AddHabito(props) {
+
+  const {
+    setRenderAdd,
+    token,
+    disable,
+    setDisable,
+    setName, 
+    name,
+    days, 
+    setDays, 
+  } = useContext(Context);
 
 const {reloadAfterAddOrDelete} = props
 
-  const {
-    setAdd,
-    token,
-    name,
-    setName,
-    disable,
-    setDisable,
-    days,
-    setDays,
-  } = useContext(Context);
+// const [name, setName] = useState('')
+// const [days, setDays] = useState([])
+
 
   function cliqueiDiaSemana(id) {
     if (days.includes(id)) {
@@ -61,7 +65,7 @@ const {reloadAfterAddOrDelete} = props
         console.log("resposta.data em: POST de Adicionar novo Habito", resposta.data);
         setDays([]); //volta a ficar limpo para adc um novo conjunto de dias
         setName("");
-        setAdd(false);
+        setRenderAdd(false);
         reloadAfterAddOrDelete()
         setDisable(false);
       });
@@ -78,7 +82,7 @@ const {reloadAfterAddOrDelete} = props
   }
 
   return (
-    <DivRegistrarHabito>
+    <DivAddHabito>
 
       <div>
         <DivInput>
@@ -111,7 +115,7 @@ const {reloadAfterAddOrDelete} = props
 
       <div>
         <ListButtons>
-        <ButtonCancelar onClick={() => setAdd(false)}>Cancelar</ButtonCancelar>
+        <ButtonCancelar disabled={disable} onClick={() => setRenderAdd(false)}>Cancelar</ButtonCancelar>
         <ButtonAdicionar type="submit" disabled={disable} onClick={adicionar}>
           {disable ? (
             <ThreeDots type="ThreeDots" color="#fff" height={20} width={50} />
@@ -121,11 +125,11 @@ const {reloadAfterAddOrDelete} = props
         </ButtonAdicionar>
         </ListButtons>
       </div>
-    </DivRegistrarHabito>
+    </DivAddHabito>
   );
 }
 
-export const DivRegistrarHabito = styled.div`
+export const DivAddHabito = styled.div`
   background-color: white;
   width: 100%;
   height: 180px;

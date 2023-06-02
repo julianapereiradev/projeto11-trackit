@@ -4,7 +4,13 @@ import { Context } from "../context/Context";
 import axios from "axios";
 
 export default function ItemHoje(props) {
-
+  
+  const { 
+    token, 
+    setTodayList, 
+    setArrayDoneTrue 
+  } = useContext(Context);
+  
   const { 
     currentSequence, 
     done, 
@@ -13,11 +19,6 @@ export default function ItemHoje(props) {
     name
   } = props;
   
-  const { 
-    token, 
-    setTodaysHabitsList, 
-    setTotalVerdadeiros 
-  } = useContext(Context);
 
   const [isChecked, setIsChecked] = useState(done);
 
@@ -34,8 +35,8 @@ export default function ItemHoje(props) {
     const promise = axios.get(URL, config);
 
     promise.then((resposta) => {
-      setTodaysHabitsList(resposta.data);
-      setTotalVerdadeiros(resposta.data.filter((i) => i.done == true));
+      setTodayList(resposta.data);
+      setArrayDoneTrue(resposta.data.filter((i) => i.done == true));
       console.log(
         "resposta.data em: GET no ItemHoje para recarregar lista Hoje:",
         resposta.data

@@ -7,11 +7,11 @@ import { Context } from "../context/Context";
 
 export default function Menu() {
   const { 
-    todaysHabitsList, 
-    totalVerdadeiros, 
+    todayList, 
+    arrayDoneTrue, 
   } = useContext(Context);
 
-  const percentage = ((Number(totalVerdadeiros.length))/(Number(todaysHabitsList.length)))*100;
+  const percentage = ((Number(arrayDoneTrue.length))/(Number(todayList.length)))*100;
 
   return (
     <>

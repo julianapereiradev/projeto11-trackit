@@ -9,8 +9,8 @@ export default function ItemHabito(props) {
 
   const { id, name, days, reloadAfterAddOrDelete } = props;
 
-  function deletarItemHabito(id) {
 
+  function deletarItemHabito(id) {
     if (window.confirm("Tem certeza que quer deletar este item?")) {
       const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
 
