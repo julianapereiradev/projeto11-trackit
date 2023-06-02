@@ -1,7 +1,7 @@
 import { useContext } from "react";
 import styled from "styled-components";
 import { Context } from "../context/Context";
-import diasDaSemana from "../constants/diasdasemana";
+import diasDaSemana from "../data/diasdasemana";
 import axios from "axios";
 
 export default function ItemHabito(props) {

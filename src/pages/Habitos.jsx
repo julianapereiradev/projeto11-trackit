@@ -5,8 +5,8 @@ import { useContext, useEffect } from "react";
 import { Context } from "../context/Context";
 import axios from "axios";
 
-import RegistrarHabito from "./RegistrarHabito";
-import ItemHabito from "./ItemHabito";
+import RegistrarHabito from "../components/RegistrarHabito";
+import ItemHabito from "../components/ItemHabito";
 
 export default function Habitos() {
   const { setAdd, token, setHabitsList, add, habitsList } = useContext(Context);

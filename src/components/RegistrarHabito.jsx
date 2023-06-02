@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { useContext } from "react";
 import { Context } from "../context/Context";
 import { ThreeDots } from "react-loader-spinner";
-import diasDaSemana from "../constants/diasdasemana";
+import diasDaSemana from "../data/diasdasemana";
 import axios from "axios";
 
 export default function RegistrarHabito(props) {

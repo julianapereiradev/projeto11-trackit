@@ -10,23 +10,18 @@ const GlobalStyle = createGlobalStyle`
 	}
 
 	input {
-		border: 1px solid #D4D4D4;
-		border-radius: 5px;
 		height: 45px;
 		width: 100%;
-		margin-bottom: 7px;
-		font-family: 'Roboto';
+		font-family: 'Lexend Deca', sans-serif;
+		border: 1px solid #D4D4D4;
+		border-radius: 5px;
 		font-size: 20px;
 		display: flex;
 		align-items: center;
-		
-		
-		font-family: 'Lexend Deca', sans-serif;
-		&::placeholder{
-			font-style: normal;
-			color: #DBDBDB;
+		margin-bottom: 8px;
+		&::placeholder {
 			font-family: 'Lexend Deca', sans-serif;
-			font-weight: 500;
+			color: #DBDBDB;
 		}	
 	}
 `
