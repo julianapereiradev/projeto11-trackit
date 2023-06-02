@@ -34,5 +34,6 @@ const DivContainer = styled.div`
     color: #666666;
     font-weight: 400;
     font-size: 18px;
+    line-height: 22px;
   }
 `;

@@ -6,118 +6,122 @@ import { TrashOutline } from "react-ionicons";
 import axios from "axios";
 
 export default function ItemHabito(props) {
-  const { token } =
-    useContext(Context);
+  const { token } = useContext(Context);
 
   const { id, name, days, reloadAfterAddOrDelete } = props;
 
-function deletarItemHabito(id) {
+  function deletarItemHabito(id) {
+
     if (window.confirm("Tem certeza que quer deletar este item?")) {
-        
-        const URL =
-        `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
-  
+      const URL = `https://mock-api.bootcamp.respondeai.com.br/api/v2/trackit/habits/${id}`;
+
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
         },
       };
-  
+
       const promise = axios.delete(URL, config);
-  
-      promise.then(reloadAfterAddOrDelete);
-  
-      promise.catch((erro) => {
-        alert(erro.response.data.message);
-        console.log("erro no momento de deletarItemHabito:", erro);
+
+      promise.then((resp) => {
+        reloadAfterAddOrDelete();
+        console.log("resp em: DELETE no ItemHabito", resp);
       });
 
-      } else {
-        console.log('Cancelou a ação')
-      }
-}
+
+      promise.catch((erro) => {
+        alert(erro.response.data.message);
+        console.log("erro em: DELETE no ItemHabito", erro);
+      });
+    } else {
+      console.log("Cancelou a ação de deletar");
+    }
+  }
 
   return (
-    <Habit>
-      <InfoHabits>
-        <Inline>
+    <DivContainerFinishHabits>
+      
+        <FirstLine>
           <h1>{name}</h1>
-          <TrashIcon onClick={() => deletarItemHabito(id)}></TrashIcon>
-        </Inline>
+          <DeleteIcon onClick={() => deletarItemHabito(id)}><ion-icon name="trash-outline"></ion-icon></DeleteIcon>
+        </FirstLine>
 
-        <Week>
+        <SecondLine>
           {diasDaSemana.map((buttonDia) => (
-            <ButtonDays
+            <ButtonCalendar
               key={buttonDia.id}
               id={buttonDia.id}
-              daysW={days.includes(buttonDia.id)}
+              daysIncludes={days.includes(buttonDia.id)}
             >
               {buttonDia.day}
-            </ButtonDays>
+            </ButtonCalendar>
           ))}
-        </Week>
-      </InfoHabits>
-    </Habit>
+        </SecondLine>
+    
+    </DivContainerFinishHabits>
   );
 }
 
-export const Habit = styled.div`
+export const DivContainerFinishHabits = styled.div`
   width: 100%;
   height: 91px;
   background: #ffffff;
   border-radius: 5px;
+  margin-bottom: 10px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  margin-bottom: 10px;
-  padding: 0 10px;
 `;
 
-export const InfoHabits = styled.div`
-  margin: 10px;
-
-  h1 {
-    margin-bottom: 10px;
-  }
-`;
-
-export const Inline = styled.div`
+export const FirstLine = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
+  h1 {
+    margin-left: 10px;
+    color: #666666;
+    font-size: 20px;
+  }
 `;
 
-export const Week = styled.div`
+export const SecondLine = styled.div`
   width: 100%;
   height: 25px;
   display: flex;
+  margin-left: 10px;
 `;
 
-export const ButtonDays = styled.button`
+export const ButtonCalendar = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
   width: 30px;
   height: 30px;
   border: 1px solid #cfcfcf;
   border-radius: 5px;
-  margin-right: 2px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  margin-right: 5px;
   font-family: "Lexend Deca";
-  font-style: normal;
-  font-weight: 400;
-  font-size: 19.976px;
-  line-height: 25px;
-  color: #dbdbdb;
+  font-size: 20px;
+  color: ${(props) =>
+    props.daysIncludes === true ? "#FFFFFF" : "#DBDBDB"};
   background-color: ${(props) =>
-    props.daysW === true ? "#CFCFCF" : "#FFFFFF"};
+    props.daysIncludes === true ? "#CFCFCF" : "#FFFFFF"};
 `;
 
-export const TrashIcon = styled(TrashOutline)`
-  width: 18px;
-  height: 20px;
+export const DeleteIcon = styled.button`
+  width: 30px;
+  height: 30px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin-top: 10px;
+  border: none;
+  background-color: #FFFFFF;
+  cursor: pointer;
+
+  ion-icon {
+    font-size: 15px;
+    color: #666666;
+  }
 `;
