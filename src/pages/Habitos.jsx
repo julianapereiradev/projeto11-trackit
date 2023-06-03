@@ -114,8 +114,12 @@ export default function Habitos() {
 }
 
 const DivContainer = styled.div`
-  padding: 30px;
-  margin-bottom: 80px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 90px;
+  padding-left: 10px;
+  padding-right: 10px;
 `;
 
 const DivAdcHabito = styled.div`
@@ -123,7 +127,6 @@ const DivAdcHabito = styled.div`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  margin-top: 80px;
   margin-bottom: 20px;
 
   button {

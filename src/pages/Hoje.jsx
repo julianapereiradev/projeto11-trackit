@@ -55,7 +55,9 @@ export default function Hoje() {
       <Topo />
 
       <DivContainer>
-        <h2 data-test="today">{diaDaSemana}, {diaMes} </h2>
+        <h2 data-test="today">
+          {diaDaSemana}, {diaMes}{" "}
+        </h2>
 
         <div data-test="today-counter">
           {arrayDoneTrue.length === 0 ? (
@@ -90,22 +92,18 @@ export default function Hoje() {
 }
 
 const DivContainer = styled.div`
-  padding: 10px;
-  margin-bottom: 80px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  padding-top: 50px;
+  padding-bottom: 90px;
+  padding-left: 10px;
+  padding-right: 10px;
 
   h2 {
     color: #126ba5;
     font-weight: 400;
     font-size: 23px;
-    margin-top: 90px;
     margin-bottom: 5px;
-  }
-
-  h3 {
-    color: #8fc549;
-    font-size: 18px;
-    font-weight: 500;
-    margin-bottom: 30px;
   }
 `;
 

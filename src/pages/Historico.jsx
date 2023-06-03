@@ -18,9 +18,10 @@ export default function Historico() {
 }
 
 const DivContainer = styled.div`
-  margin-top: 80px; /* Altura da navbar + espaço de margem */
-  margin-left: 10px;
-  margin-right: 10px;
+  margin-top: 70px;
+  margin-bottom: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
   
   h2 {
     color: #126ba5;
