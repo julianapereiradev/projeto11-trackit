@@ -114,8 +114,10 @@ const FormRegisterContainer = styled.form`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 70px;
   padding: 30px;
+  background-color: #FFFFFF;
+  max-width: 400px;
+  height: 100vh;
 
   img {
     width: 180px;
